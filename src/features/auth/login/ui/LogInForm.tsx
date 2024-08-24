@@ -70,7 +70,7 @@ export const LogInForm = () => {
                     Забыли пароль?
                 </Button>
             </div>
-            <Button className='w-full mt-3 bg-blue-500 hover:bg-blue-400 text-white' isLoading={isPending} onClick={onSubmit}>
+            <Button className='w-full mt-3  text-white' isLoading={isPending} onClick={onSubmit}>
                 Продолжить
             </Button>
             <input type='submit' className='hidden'/>

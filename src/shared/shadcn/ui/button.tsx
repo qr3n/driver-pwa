@@ -12,7 +12,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-white text-black hover:bg-[#ddd] font-semibold rounded-full",
+        default: "bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-full",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
@@ -46,7 +46,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-        props.children = props.isLoading ? <>{props.children} <Loader2 className="text-[#999] h-4 w-4 animate-spin" /></> : props.children
+        props.children = props.isLoading ? <>{props.children} <Loader2 className="text-white h-4 w-4 animate-spin" /></> : props.children
         props.disabled = props.isLoading || props.disabled
 
       let newProps = props
