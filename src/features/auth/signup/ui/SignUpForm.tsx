@@ -39,7 +39,9 @@ export const SignUpForm = () => {
 
     useEffect(() => {
         if (isError) {
-            toast.error('Почта уже зарегестрирована')
+            toast.error('Аккаунт уже существует', {
+                duration: 1200
+            })
         }
     }, [isError]);
 

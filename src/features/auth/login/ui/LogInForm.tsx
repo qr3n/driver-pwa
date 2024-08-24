@@ -38,7 +38,9 @@ export const LogInForm = () => {
 
     useEffect(() => {
         if (isError) {
-            toast.error('Неверные данные')
+            toast.error('Неверные данные', {
+                duration: 1200
+            })
         }
     }, [isError]);
 
