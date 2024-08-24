@@ -7,8 +7,8 @@ import bgDesktop from './bg-desktop.png';
 export default function AuthPage() {
     return (
         <div className='h-full w-full flex items-center justify-center'>
-            <Image src={bgMobile} className='fixed w-screen h-screen object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
-            <Image src={bgDesktop} className='fixed w-screen h-screen object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
+            <Image src={bgMobile} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
+            <Image src={bgDesktop} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
             <div className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
 
             <div className='flex flex-col items-center justify-center w-full sm:max-w-md'>

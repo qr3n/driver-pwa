@@ -10,7 +10,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body>
         <Providers>
-          <div className='flex flex-col sm:flex-row w-screen h-screen'>
+          <div className='flex flex-col sm:flex-row w-[100dvw] h-[100dvh]'>
               <div className='w-full h-full p-4'>
                   { children }
               </div>
