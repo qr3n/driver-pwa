@@ -12,7 +12,7 @@ export const Menu = () => {
 
     return (
         <div
-            className='flex items-center justify-center sm:flex-col gap-7 p-2 w-full h-max sm:w-max sm:h-full bg-[#151515]'>
+            className='flex items-center justify-center sm:flex-col gap-7 p-4 w-full h-max sm:w-max sm:h-full bg-[#151515]'>
             <div className='flex items-center justify-center flex-col p-2 bg-[#222] rounded-3xl w-20'>
                 <div className='bg-[#333] p-2.5 rounded-2xl w-max h-max cursor-pointer'>
                     <FiHome className='w-7 h-7'/>
