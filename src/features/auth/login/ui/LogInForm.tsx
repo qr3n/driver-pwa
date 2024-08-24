@@ -66,11 +66,11 @@ export const LogInForm = () => {
             </div>
             <div className='flex w-full justify-end'>
                 <Button
-                    className='font-medium bg-transparent hover:bg-transparent text-orange-500 hover:text-orange-400'>
+                    className='font-medium bg-transparent hover:bg-transparent text-blue-500 hover:text-blue-400'>
                     Забыли пароль?
                 </Button>
             </div>
-            <Button className='w-full mt-3' isLoading={isPending} onClick={onSubmit}>
+            <Button className='w-full mt-3 bg-blue-500 hover:bg-blue-400 text-white' isLoading={isPending} onClick={onSubmit}>
                 Продолжить
             </Button>
             <input type='submit' className='hidden'/>

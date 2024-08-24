@@ -14,7 +14,7 @@ export default function LoginLayout ({ children }: PropsWithChildren) {
                     <p className='font-medium text-white text-[16px]'>Еще нет аккаунта?</p>
                     <Link href={'/auth/signup'}>
                         <Button
-                            className='font-medium text-[16px] px-1 bg-transparent hover:bg-transparent text-orange-500 hover:text-orange-400'>
+                            className='font-medium text-[16px] px-1 bg-transparent hover:bg-transparent text-blue-500 hover:text-blue-400'>
                             Регистрация
                         </Button>
                     </Link>
