@@ -1,0 +1,22 @@
+export interface IOrder {
+    id: number
+    email: string
+    name: string,
+    cargo: 'anything' | 'marketplace',
+    warehouse: 'Яндекс маркет' | 'Ozon' | 'AliExpress' | 'Lamoda' | 'Wildberriez',
+    what_to_deliver: string,
+    packing: 'box' | 'palette',
+    dimensions: string,
+    time_to_take: string,
+    time_to_deliver: string,
+    addr_to: string,
+    addr_from: string,
+    comment: string,
+    status: 'active' | 'disabled',
+    cost: number,
+    count: string,
+    sender_phone: string,
+    recipient_phone: string,
+    courier_status: 'В пути' | 'Поиск курьера',
+    tariff: 'day' | 'night',
+}
