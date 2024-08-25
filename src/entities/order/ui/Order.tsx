@@ -1,7 +1,8 @@
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
+import { OpenOrderDetails } from "./OpenOrderDetails";
 import { Button } from "@/shared/shadcn/ui/button";
-import Image from "next/image";
 import { IOrder } from "@/entities/order";
+import Image from "next/image";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -17,7 +18,9 @@ const calculateDistance = (rawData: number) => (rawData / 1000).toFixed(1).toStr
 
 export const Order = (data: IOrder) => {
     return (
-        <div className='cursor-pointer w-full bg-[#151515] flex items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
+        <div
+            className='relative cursor-pointer w-full bg-[#151515] flex items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
+            <OpenOrderDetails/>
             <div className='flex gap-4 items-center justify-center'>
                 <Image
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
@@ -28,16 +31,16 @@ export const Order = (data: IOrder) => {
                 />
                 <div>
                     <h1 className='font-semibold'>
-                        { calculateCost(data.cost, data.tariff) } руб.
+                        {calculateCost(data.cost, data.tariff)} руб.
                     </h1>
 
                     <p className='text-[#999] text-sm mt-1'>
-                        ~{ calculateDistance(data.cost) } км
+                        ~{calculateDistance(data.cost)} км
                     </p>
                 </div>
             </div>
             <Button
-                className='text-white bg-[#333] hover:bg-[#555] p-4 font-normal'
+                className='text-white bg-[#333] hover:bg-[#555] p-4 font-normal z-20'
             >
                 Забронировать
             </Button>

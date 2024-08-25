@@ -16,29 +16,21 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <meta name="generator" content={'Next.js'}/>
           <link rel="manifest" href={"/manifest.json"}/>
           <meta name="keywords" content={["nextjs", "nextjs14", "next14", "pwa", "next-pwa"].join(", ")}/>
-          {[{ media: "(prefers-color-scheme: dark)", color: "#fff" }].map(({media, color}, index) => (
-              <meta key={index} name="theme-color" media={media} content={color}/>
-          ))}
-          {[
-              { name: "Alldo Faiz Ramadhani" },
-              {
-                  name: "Alldo Faiz Ramadhani",
-                  url: "https://www.linkedin.com/in/alldofaiz/",
-              },
-          ].map(({name, url}, index) => (
-              <meta key={index} name="author" content={name} {...(url && {href: url})} />
-          ))}
-          <meta name="viewport" content={"minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"}/>
-          {[
-              { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
-              { rel: "icon", url: "icons/icon-128x128.png" },
-          ].map(({rel, url}, index) => (
-              <link key={index} rel={rel} href={url}/>
-          ))}
+          <meta name="theme-color" media={"(prefers-color-scheme: dark)"} content={"#fff"}/>
+          <meta
+              name="author"
+              content={"Alldo Faiz Ramadhani"} {...("Alldo Faiz Ramadhani" && {href: 'https://github.com/qr3n'})}
+          />
+          <meta
+              name="viewport"
+              content={"minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"}
+          />
+          <link rel={"apple-touch-icon"} href={"icons/icon-128x128.png"}/>
+          <link rel={"icon"} href={"icons/icon-128x128.png"}/>
       </head>
       <body>
       <Providers>
-          <Toaster toastOptions={{
+      <Toaster toastOptions={{
               style: {
                   background: '#333',
                   color: '#fff',

@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/shadcn/ui/tabs";
+import { OrderDetailsProvider } from "@/entities/order";
 import { Order, useOrders } from "@/entities/order";
 import { OrdersList } from "./OrdersList";
 
@@ -15,23 +16,25 @@ export default async function DashboardPage() {
                     <TabsTrigger value='taked'>В работе</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value='today' className='w-full max-w-3xl'>
-                    <OrdersList>
-                        {todayOrders.map(order => <Order key={order.id} {...order}/>)}
-                    </OrdersList>
-                </TabsContent>
+                <OrderDetailsProvider>
+                    <TabsContent value='today' className='w-full max-w-3xl'>
+                        <OrdersList>
+                            {todayOrders.map(order => <Order key={order.id} {...order}/>)}
+                        </OrdersList>
+                    </TabsContent>
 
-                <TabsContent value='planned' className='w-full max-w-3xl'>
-                    <OrdersList>
-                        {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
-                    </OrdersList>
-                </TabsContent>
+                    <TabsContent value='planned' className='w-full max-w-3xl'>
+                        <OrdersList>
+                            {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
+                        </OrdersList>
+                    </TabsContent>
 
-                <TabsContent value='taked' className='w-full max-w-3xl'>
-                    <OrdersList>
-                        {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
-                    </OrdersList>
-                </TabsContent>
+                    <TabsContent value='taked' className='w-full max-w-3xl'>
+                        <OrdersList>
+                            {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
+                        </OrdersList>
+                    </TabsContent>
+                </OrderDetailsProvider>
             </Tabs>
         </div>
     )
