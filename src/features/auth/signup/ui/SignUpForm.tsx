@@ -51,11 +51,7 @@ export const SignUpForm = () => {
                 duration: 700
             })
             cookies.set('access_token', data.data.token)
-
-            const timeout = setTimeout(() => {
-                router.push('/orders')
-                clearTimeout(timeout)
-            }, 200)
+            router.push('/orders')
         }
     }, [cookies, data, isSuccess, router]);
 
