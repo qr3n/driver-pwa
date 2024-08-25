@@ -5,6 +5,7 @@ import { calculateCost, calculateDistance, IOrder, OrderDetailsContext } from "@
 import { Dialog, DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
 import { Button } from "@/shared/shadcn/ui/button";
 import toast from "react-hot-toast";
+import { CreateOrderDiscount } from "@/features/order/discount";
 
 export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
     const [orderDetails, setOrderDetails] = useState<IOrder>();
@@ -40,11 +41,7 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                                 <p className='mt-1 font-medium'>{orderDetails.time_to_deliver}</p>
                             </div>
 
-                            <div className='relative w-full h-[50px] pt-12'>
-                                <button className="wrapper">
-                                    <p className="wave-btn text-sm"><span>Скидка</span></p>
-                                </button>
-                            </div>
+                            <CreateOrderDiscount/>
 
                             <DialogClose>
                                 <Button

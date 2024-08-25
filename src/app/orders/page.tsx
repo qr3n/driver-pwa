@@ -3,12 +3,14 @@ import { OrderDetailsModal } from "@/entities/order";
 import { useOrders } from "@/entities/order";
 import { OrdersList } from "./OrdersList";
 import { OrdersRender } from "./OrdersRender";
+import { UpdateOrdersWebsocket } from "@/app/orders/UpdateOrdersWebsocket";
 
 export default async function DashboardPage() {
     const { todayOrders, plannedOrders } = await useOrders()
 
     return (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
+            <UpdateOrdersWebsocket/>
             <h1 className='text-3xl sm:text-4xl font-semibold'>Все заказы</h1>
             <Tabs defaultValue='today' className='mt-8 w-full flex flex-col items-center'>
                 <TabsList>

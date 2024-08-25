@@ -54,7 +54,7 @@ export const LogInForm = () => {
             const timeout = setTimeout(() => {
                 router.push('/orders')
                 clearTimeout(timeout)
-            }, 700)
+            }, 200)
         }
     }, [cookies, data, isSuccess, router]);
 

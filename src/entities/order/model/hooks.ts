@@ -1,3 +1,5 @@
+'use server';
+
 import { IOrder } from "@/entities/order";
 
 const createDate = (date: Date) => {
