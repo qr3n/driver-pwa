@@ -15,9 +15,9 @@ const imagesMap = {
 export const Order = (data: IOrder) => {
     return (
         <div
-            className='relative cursor-pointer w-full bg-[#151515] flex items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
+            className='relative cursor-pointer w-full bg-[#151515] flex flex-col sm:flex-row sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
             <OpenOrderDetails {...data}/>
-            <div className='flex gap-4 items-center justify-center'>
+            <div className='flex gap-4 items-center sm:justify-center'>
                 <Image
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
                     alt={'icon'}
