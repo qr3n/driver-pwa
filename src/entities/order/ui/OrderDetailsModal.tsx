@@ -18,7 +18,7 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
             <Dialog>
                 { children }
 
-                <DialogContent className='bg-[#161616] h-[100dvh] sm:h-[80dvh] sm:max-h-[80dvh] flex flex-col'>
+                <DialogContent className='bg-[#111] h-[100dvh] sm:h-[80dvh] sm:max-h-[80dvh] flex flex-col'>
                     { orderDetails && (
                         <>
                             <div className='mt-5'>
