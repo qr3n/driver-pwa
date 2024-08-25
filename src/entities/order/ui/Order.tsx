@@ -40,7 +40,7 @@ export const Order = (data: IOrder) => {
                 </div>
             </div>
             <Button
-                className='text-white bg-[#333] hover:bg-[#555] p-4 font-normal z-20'
+                className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
             >
                 Забронировать
             </Button>

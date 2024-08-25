@@ -10,7 +10,7 @@ export const OrderDetailsProvider = ({ children }: PropsWithChildren) => {
             <Dialog>
                 { children }
 
-                <DialogContent>
+                <DialogContent className='bg-[#161616] h-screen sm:h-[80dvh]'>
 
                 </DialogContent>
             </Dialog>
