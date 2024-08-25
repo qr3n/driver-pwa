@@ -17,7 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <meta name="generator" content={'Next.js'}/>
           <link rel="manifest" href={"/manifest.json"}/>
           <meta name="keywords" content={["nextjs", "nextjs14", "next14", "pwa", "next-pwa"].join(", ")}/>
-          <meta name="theme-color" media={"(prefers-color-scheme: dark)"} content={"#fff"}/>
+          <meta name="theme-color" media={"(prefers-color-scheme: dark)"} content={"#000000"}/>
           <meta
               name="author"
               content={"Alldo Faiz Ramadhani"} {...("Alldo Faiz Ramadhani" && {href: 'https://github.com/qr3n'})}

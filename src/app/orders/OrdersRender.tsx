@@ -19,7 +19,7 @@ export const OrdersRender = async (props: IProps) => {
                     <div
                         className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
                     <div className='absolute top-8 flex items-center justify-center flex-col'>
-                        <Image placeholder="blur" priority src={dolphin} width={350} height={350} alt='test' className='w-36 sm:w-40 md:w-44 lg:w-48 xl:w-56'/>
+                        <Image placeholder="blur" priority src={dolphin} width={350} height={350} alt='test' className='w-40 sm:w-44 md:w-44 lg:w-48 xl:w-56'/>
                         <h1 className='text-2xl md:text-3xl font-semibold mt-8'>
                             Заказов пока нет.
                         </h1>

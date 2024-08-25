@@ -2,8 +2,9 @@
 
 import { PropsWithChildren, useState } from "react";
 import { calculateCost, calculateDistance, IOrder, OrderDetailsContext } from "@/entities/order";
-import { Dialog, DialogContent } from "@/shared/shadcn/ui/dialog";
+import { Dialog, DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
 import { Button } from "@/shared/shadcn/ui/button";
+import toast from "react-hot-toast";
 
 export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
     const [orderDetails, setOrderDetails] = useState<IOrder>();
@@ -45,13 +46,16 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                                 </button>
                             </div>
 
-                            <Button
-                                className='text-white bg-[#222] hover:bg-[#333] border border-[#555] w-full font-semibold p-4 z-20'
-                            >
-                                Забронировать
-                            </Button>
+                            <DialogClose>
+                                <Button
+                                    onClick={() => toast.success('Вы успешно взяли заказ.')}
+                                    className='text-white bg-[#222] hover:bg-[#333] border border-[#555] w-full font-semibold p-4 z-20'
+                                >
+                                    Забронировать
+                                </Button>
+                            </DialogClose>
 
-                            <p className='text-center text-sm text-[#999]'>До конца аукциона осталось <span className='text-white'>45 мин.</span></p>
+                            <p className='text-center text-sm text-[#999]'>До конца аукциона осталось <span className='text-white'>15 мин.</span></p>
                         </>
                     )}
                 </DialogContent>

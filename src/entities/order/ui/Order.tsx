@@ -1,8 +1,8 @@
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import { OpenOrderDetails } from "./OpenOrderDetails";
-import { Button } from "@/shared/shadcn/ui/button";
 import { calculateCost, calculateDistance, IOrder } from "@/entities/order";
 import Image from "next/image";
+import { TakeOrder } from "@/features/order/take/ui/TakeOrder";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -35,11 +35,7 @@ export const Order = (data: IOrder) => {
                     </p>
                 </div>
             </div>
-            <Button
-                className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
-            >
-                Забронировать
-            </Button>
+            <TakeOrder/>
         </div>
     )
 }
