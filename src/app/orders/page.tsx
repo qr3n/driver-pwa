@@ -18,19 +18,19 @@ export default async function DashboardPage() {
                 </TabsList>
 
                 <OrderDetailsModal>
-                    <TabsContent value='today' className='w-full max-w-3xl'>
+                    <TabsContent forceMount value='today' className='w-full max-w-3xl'>
                         <OrdersList>
                             <OrdersRender orders={todayOrders} type='active'/>
                         </OrdersList>
                     </TabsContent>
 
-                    <TabsContent value='planned' className='w-full max-w-3xl'>
+                    <TabsContent forceMount value='planned' className='w-full max-w-3xl'>
                         <OrdersList>
                             <OrdersRender orders={plannedOrders} type='planned'/>
                         </OrdersList>
                     </TabsContent>
 
-                    <TabsContent value='taked' className='w-full max-w-3xl'>
+                    <TabsContent forceMount value='taked' className='w-full max-w-3xl'>
                         <OrdersList>
                             <OrdersRender orders={[]} type='taken'/>
                         </OrdersList>
