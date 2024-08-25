@@ -26,7 +26,7 @@ export const Menu = () => {
         <div
             className='z-50 flex items-center justify-center sm:flex-col gap-7 p-4 w-full h-max sm:w-max sm:h-full bg-[#151515]'>
             <Link href={'/orders'}>
-                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname.includes('/order') ? activeStyle : inactiveStyle}>
+                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname === '/orders' ? activeStyle : inactiveStyle}>
                     <FiHome className='w-7 h-7'/>
                 </div>
             </Link>
@@ -37,12 +37,15 @@ export const Menu = () => {
             {/*    </div>*/}
             {/*</Link>*/}
 
-            <div className='bg-[#333] hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'>
-                <RiMapPinLine className='w-7 h-7 text-[#999]'/>
-            </div>
+            <Link href={'/orders/active'}>
+                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname === '/orders/active' ? activeStyle : inactiveStyle}>
+                    <RiMapPinLine className='w-7 h-7'/>
+                </div>
+            </Link>
 
             <Link href={'/profile'}>
-                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname.includes('/profile') ? activeStyle : inactiveStyle}>
+                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'
+                     style={pathname.includes('/profile') ? activeStyle : inactiveStyle}>
                     <FiUser className='w-7 h-7'/>
                 </div>
             </Link>

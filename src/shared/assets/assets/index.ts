@@ -9,6 +9,7 @@ import yandexIcon from './yandex.png'
 import bgDesktop from './bg-desktop.png'
 import bgMobile from './bg-mobile.png'
 import dolphin from './dolphin.png'
+import dolphinWithGlasses from './dolphin-with-glasses.png'
 
 
 export {
@@ -22,5 +23,6 @@ export {
     yandexIcon,
     bgDesktop,
     bgMobile,
-    dolphin
+    dolphin,
+    dolphinWithGlasses
 }
