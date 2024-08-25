@@ -19,7 +19,7 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                 <DialogContent className='bg-[#161616] h-[100dvh] sm:h-[80dvh] sm:max-h-[80dvh] flex flex-col'>
                     { orderDetails && (
                         <>
-                            <div>
+                            <div className='mt-5'>
                                 <h1 className='text-3xl text-center font-semibold'>{calculateCost(orderDetails.cost, orderDetails.tariff)} руб.</h1>
                                 <h1 className='text-center text-[#999]'>~{calculateDistance(orderDetails.cost)} км</h1>
                             </div>
