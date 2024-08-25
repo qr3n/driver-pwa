@@ -8,6 +8,7 @@ import wildberriesIcon from './wb.png'
 import yandexIcon from './yandex.png'
 import bgDesktop from './bg-desktop.png'
 import bgMobile from './bg-mobile.png'
+import dolphin from './dolphin.png'
 
 export {
     aliIcon,
@@ -19,5 +20,6 @@ export {
     wildberriesIcon,
     yandexIcon,
     bgDesktop,
-    bgMobile
+    bgMobile,
+    dolphin
 }

@@ -1,12 +1,12 @@
 import { bgMobile } from '@/shared/assets';
 import { bgDesktop } from '@/shared/assets';
 import { PropsWithChildren } from "react";
-import { useSession } from "@/entities/session";
 import { redirect } from "next/navigation";
 import Image from "next/image";
+import { useServerSession } from "@/entities/session/server";
 
 export default function AuthLayout({ children }: PropsWithChildren) {
-    const session = useSession()
+    const session = useServerSession()
 
     if (session) redirect('/orders')
 

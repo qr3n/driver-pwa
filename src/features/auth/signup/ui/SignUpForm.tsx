@@ -47,7 +47,9 @@ export const SignUpForm = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            toast.success('Добро пожаловать!')
+            toast.success('Добро пожаловать!', {
+                duration: 700
+            })
             cookies.set('access_token', data.data.token)
 
             const timeout = setTimeout(() => {

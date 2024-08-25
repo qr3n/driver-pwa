@@ -10,8 +10,8 @@ export const OrdersList = ({ children }: PropsWithChildren) => {
             flex-col
             gap-4
             overflow-y-auto
-            h-[calc(100dvh-340px)]
-            sm:h-[calc(100dvh-250px)]
+            h-[calc(100dvh-320px)]
+            sm:h-[calc(100dvh-270px)]
             px-4
         '>
             { children }

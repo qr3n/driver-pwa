@@ -110,4 +110,84 @@ input:-webkit-autofill:active{
   -webkit-text-fill-color: #ffffff !important;
   border: 1px solid #505050;
   outline: none !important;
+  border-radius: 12px;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.wave-btn {
+  background-color: #001b49;
+  height: 41px;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #5078b8;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  transition: all 1s, background 0.3s;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wave-btn:before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 130px;
+  background-color: rgb(33, 116, 255);
+  top: 30px;
+  left: 0;
+  animation: wave 15s infinite linear;
+  transition: all 1s, background-color 0.3s, scale 0.3s;
+  z-index: -50;
+  rotate: 90deg;
+}
+
+
+.wave-btn:hover:before {
+  background-color: rgb(28, 106, 230);
+  scale: 1.1;
+  animation-duration: 8s;
+}
+
+.wave-btn:hover:after {
+  background-color: rgb(28, 106, 230);
+}
+
+
+.wave-btn:after {
+  transition: all 1s, background-color 0.3s;
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 100%;
+  background-color: rgb(33, 116, 255);
+  top: 0;
+  left: 0;
+  transform: translate(-50%);
+  z-index: -50;
+}
+
+.wave-btn:hover:before {
+  top: 15px;
+}
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%) rotate(-180deg);
+
+  }
+  100% {
+    transform: translate(-50%) rotate(360deg);
+  }
 }

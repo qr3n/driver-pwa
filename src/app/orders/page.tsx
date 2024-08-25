@@ -1,40 +1,41 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/shadcn/ui/tabs";
-import { OrderDetailsProvider } from "@/entities/order";
-import { Order, useOrders } from "@/entities/order";
+import { OrderDetailsModal } from "@/entities/order";
+import { useOrders } from "@/entities/order";
 import { OrdersList } from "./OrdersList";
+import { OrdersRender } from "./OrdersRender";
 
 export default async function DashboardPage() {
     const { todayOrders, plannedOrders } = await useOrders()
 
     return (
-        <div className='flex flex-col w-full items-center justify-center pt-12 px-4'>
-            <h1 className='text-3xl sm:text-4xl font-semibold'>Открытые заказы</h1>
+        <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
+            <h1 className='text-3xl sm:text-4xl font-semibold'>Все заказы</h1>
             <Tabs defaultValue='today' className='mt-8 w-full flex flex-col items-center'>
                 <TabsList>
-                    <TabsTrigger value='today'>Текущие</TabsTrigger>
+                    <TabsTrigger value='today'>На сегодня</TabsTrigger>
                     <TabsTrigger value='planned'>Запланированные</TabsTrigger>
                     <TabsTrigger value='taked'>В работе</TabsTrigger>
                 </TabsList>
 
-                <OrderDetailsProvider>
+                <OrderDetailsModal>
                     <TabsContent value='today' className='w-full max-w-3xl'>
                         <OrdersList>
-                            {todayOrders.map(order => <Order key={order.id} {...order}/>)}
+                            <OrdersRender orders={todayOrders} type='active'/>
                         </OrdersList>
                     </TabsContent>
 
                     <TabsContent value='planned' className='w-full max-w-3xl'>
                         <OrdersList>
-                            {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
+                            <OrdersRender orders={plannedOrders} type='planned'/>
                         </OrdersList>
                     </TabsContent>
 
                     <TabsContent value='taked' className='w-full max-w-3xl'>
                         <OrdersList>
-                            {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
+                            <OrdersRender orders={[]} type='taken'/>
                         </OrdersList>
                     </TabsContent>
-                </OrderDetailsProvider>
+                </OrderDetailsModal>
             </Tabs>
         </div>
     )

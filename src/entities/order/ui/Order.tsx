@@ -1,7 +1,7 @@
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import { OpenOrderDetails } from "./OpenOrderDetails";
 import { Button } from "@/shared/shadcn/ui/button";
-import { IOrder } from "@/entities/order";
+import { calculateCost, calculateDistance, IOrder } from "@/entities/order";
 import Image from "next/image";
 
 const imagesMap = {
@@ -12,15 +12,11 @@ const imagesMap = {
     'Wildberries': wildberriesIcon
 }
 
-const calculateCost = (rawData: number, tariff: 'day' | 'night') => Math.round(rawData / 1000 * 42) + (tariff === 'day' ? 800 : 1000)
-const calculateDistance = (rawData: number) => (rawData / 1000).toFixed(1).toString().replace('.', ',')
-
-
 export const Order = (data: IOrder) => {
     return (
         <div
             className='relative cursor-pointer w-full bg-[#151515] flex items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
-            <OpenOrderDetails/>
+            <OpenOrderDetails {...data}/>
             <div className='flex gap-4 items-center justify-center'>
                 <Image
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}

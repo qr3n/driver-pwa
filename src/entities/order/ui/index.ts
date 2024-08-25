@@ -1,2 +1,2 @@
 export * from './Order'
-export * from './OrderDetailsProvider'
+export * from './OrderDetailsModal'

@@ -5,6 +5,7 @@ import { Menu } from "@/widgets/menu";
 import { metadata } from "@/app/meta";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { CookiesProvider } from "next-client-cookies/server";
 export { metadata }
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -30,24 +31,24 @@ export default function RootLayout({ children }: PropsWithChildren) {
       </head>
       <body>
       <Providers>
-      <Toaster toastOptions={{
-              style: {
-                  background: '#333',
-                  color: '#fff',
-                  borderRadius: '200px',
-                  fontWeight: 500
-              },
-
-              duration: 700
-          }}/>
-          <NextTopLoader color="#FF551F" template='<div class="bar" role="bar"><div class="peg"></div></divz'
+          <Toaster toastOptions={{
+                  style: {
+                      background: '#333',
+                      color: '#fff',
+                      borderRadius: '200px',
+                      fontWeight: 500
+                  },
+           }}/>
+          <NextTopLoader color="#4E79FFFF" template='<div class="bar" role="bar"><div class="peg"></div></divz'
                          showSpinner={false}/>
-          <div className='flex flex-col sm:flex-row w-[100dvw] h-[100dvh]'>
-              <div className='w-full h-full'>
-                  {children}
+          <CookiesProvider>
+              <div className='flex flex-col sm:flex-row w-[100dvw] h-[100dvh]'>
+                  <div className='w-full h-full'>
+                      {children}
+                  </div>
+                  <Menu/>
               </div>
-              <Menu/>
-          </div>
+          </CookiesProvider>
       </Providers>
       </body>
       </html>
