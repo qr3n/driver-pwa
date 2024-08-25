@@ -8,7 +8,7 @@ const imagesMap = {
     'Ozon': ozonIcon,
     'AliExpress': aliIcon,
     'Lamoda': lamodaIcon,
-    'Wildberriez': wildberriesIcon
+    'Wildberries': wildberriesIcon
 }
 
 const calculateCost = (rawData: number, tariff: 'day' | 'night') => Math.round(rawData / 1000 * 42) + (tariff === 'day' ? 800 : 1000)
@@ -23,7 +23,8 @@ export const Order = (data: IOrder) => {
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
                     alt={'icon'}
                     width={42}
-                    className='rounded-xl'
+                    height={42}
+                    className='rounded-xl object-cover'
                 />
                 <div>
                     <h1 className='font-semibold'>

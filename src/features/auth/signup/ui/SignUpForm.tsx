@@ -40,7 +40,7 @@ export const SignUpForm = () => {
     useEffect(() => {
         if (isError) {
             toast.error('Аккаунт уже существует', {
-                duration: 1200
+                duration: 1600
             })
         }
     }, [isError]);

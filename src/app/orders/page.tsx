@@ -12,6 +12,7 @@ export default async function DashboardPage() {
                 <TabsList>
                     <TabsTrigger value='today'>Текущие</TabsTrigger>
                     <TabsTrigger value='planned'>Запланированные</TabsTrigger>
+                    <TabsTrigger value='taked'>В работе</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value='today' className='w-full max-w-3xl'>
@@ -21,6 +22,12 @@ export default async function DashboardPage() {
                 </TabsContent>
 
                 <TabsContent value='planned' className='w-full max-w-3xl'>
+                    <OrdersList>
+                        {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
+                    </OrdersList>
+                </TabsContent>
+
+                <TabsContent value='taked' className='w-full max-w-3xl'>
                     <OrdersList>
                         {plannedOrders.map(order => <Order key={order.id} {...order}/>)}
                     </OrdersList>

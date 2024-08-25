@@ -10,11 +10,13 @@ export const useOrders = async () => {
         { cache: 'no-cache', next: { tags: ['orders'] } }
     )
 
+
     const notSortedOrders: IOrder[] = await data.json()
 
     const orders = notSortedOrders.reverse()
 
     const activeOrders = orders.filter(o => o.courier_status === 'Поиск курьера' || o.courier_status === null)
+    console.log(activeOrders)
 
     const now = createDate(new Date())
 
