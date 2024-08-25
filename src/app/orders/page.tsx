@@ -12,11 +12,11 @@ export default async function DashboardPage() {
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
             <UpdateOrdersWebsocket/>
             <h1 className='text-3xl sm:text-4xl font-semibold'>Все заказы</h1>
-            <Tabs defaultValue='today' className='mt-8 w-full flex flex-col items-center'>
+            <Tabs defaultValue='today' className='mt-5 sm:mt-8 w-full flex flex-col items-center'>
                 <TabsList>
-                    <TabsTrigger value='today'>На сегодня</TabsTrigger>
-                    <TabsTrigger value='planned'>Запланированные</TabsTrigger>
-                    <TabsTrigger value='taked'>В работе</TabsTrigger>
+                    <TabsTrigger value='today' className='text-xs sm:text-sm'>На сегодня</TabsTrigger>
+                    <TabsTrigger value='planned' className='text-xs sm:text-sm'>Запланированные</TabsTrigger>
+                    <TabsTrigger value='taked' className='text-xs sm:text-sm'>В работе</TabsTrigger>
                 </TabsList>
 
                 <OrderDetailsModal>
