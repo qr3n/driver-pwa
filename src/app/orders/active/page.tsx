@@ -16,7 +16,7 @@ export default function ActiveOrder() {
                 <Image priority src={dolphinWithGlasses} width={350} height={350} alt='test'
                        className='w-40 sm:w-44 md:w-44 lg:w-48 xl:w-56'/>
                 <h1 className='text-2xl md:text-3xl font-semibold mt-8'>
-                    У вас еще нет заказа
+                    Активного заказа пока нет
                 </h1>
                 <h2 className='text-sm sm:text-base text-[#999] mt-1'>
                     Скорее выберите его <Link href='/orders'><span className='text-blue-500 cursor-pointer'>тут!</span></Link>
