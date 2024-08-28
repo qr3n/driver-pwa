@@ -1,4 +1,5 @@
-import { Dialog, DialogContent, DialogTrigger } from "@/shared/shadcn/ui/dialog";
+import { Dialog, DialogTrigger } from "@/shared/shadcn/ui/dialog";
+import { CreateOrderDiscountModal } from "./CreateOrderDiscountModal";
 
 export const CreateOrderDiscount = () => {
     return (
@@ -10,11 +11,7 @@ export const CreateOrderDiscount = () => {
                     </button>
                 </div>
             </DialogTrigger>
-            <DialogContent className='bg-[#111] h-[100dvh] sm:h-[60dvh] sm:max-h-[80dvh] flex flex-col'>
-                <div className='mt-5'>
-                    <h1 className='text-3xl text-center font-semibold'>Предложить скидку</h1>
-                </div>
-            </DialogContent>
+            <CreateOrderDiscountModal/>
         </Dialog>
     )
 }
