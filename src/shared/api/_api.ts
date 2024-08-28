@@ -2,7 +2,7 @@ import axios from 'axios'
 import { QueryClient } from "@tanstack/react-query";
 
 export const api = axios.create({
-    baseURL: 'https://stubbybot.ru',
+    baseURL: 'https://postavan.com/api/driver',
     timeout: 10000,
 })
 
