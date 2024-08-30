@@ -1,23 +1,79 @@
 'use server';
 
 import { IOrder } from "@/entities/order";
+import { useServerSession } from "@/entities/session/server";
 
 const createDate = (date: Date) => {
     return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear()
 }
 
-export const useOrders = async () => {
+interface INotParsedOrder {
+    id: number
+    email: string
+    name: string,
+    cargo: 'anything' | 'marketplace',
+    warehouse: 'Яндекс маркет' | 'Ozon' | 'AliExpress' | 'Lamoda' | 'Wildberries',
+    what_to_deliver: string,
+    packing: 'box' | 'palette',
+    dimensions: string,
+    time_to_take: string,
+    time_to_deliver: string,
+    addr_to: string,
+    addr_from: string,
+    comment: string,
+    status: 'active' | 'disabled',
+    cost: number,
+    count: string,
+    sender_phone: string,
+    recipient_phone: string,
+    courier_status: 'В пути' | 'Поиск курьера',
+    tariff: 'day' | 'night',
+    auction: boolean,
+    timestamp: string,
+    driver_email: string,
+    current: boolean
+}
+
+export const useCurrentOrder = async () => {
+    const session = useServerSession()
+
     const data = await fetch(
-        'https://postavan.com/api/orders/all?admin_token=secret',
-        { cache: 'no-cache', next: { tags: ['orders'] } }
+        `https://postavan.com/api/order/current?token=${session?.token}`,
+        { next: { tags: ['current_orders'] } }
     )
 
+    const order: IOrder | null = await data.json()
 
-    const notSortedOrders: IOrder[] = await data.json()
+    console.log('order')
 
-    const orders = notSortedOrders.reverse()
+    return order
+}
 
-    const activeOrders = orders.filter(o => o.courier_status === 'Поиск курьера' || o.courier_status === null)
+
+export const useOrders = async () => {
+    const session = useServerSession()
+
+    const data = await fetch(
+        'https://postavan.com/api/orders/all?admin_token=secret',
+        { next: { tags: ['orders'] } }
+    )
+
+    const notSortedOrders: INotParsedOrder[] = await data.json()
+
+    notSortedOrders.map(o => console.log(o.driver_email, o.id, o.courier_status))
+
+    const newNotSortedOrders: IOrder[] = notSortedOrders.map(o => {
+        const date = new Date(Date.parse(o.timestamp));
+
+        return {
+            ...o,
+            timestamp: date
+        }
+    })
+
+    const orders = newNotSortedOrders.reverse()
+
+    const activeOrders = orders.filter(o => (o.courier_status === 'Поиск курьера' || o.courier_status === null) && o.driver_email !== session?.email)
 
     const now = createDate(new Date())
 
@@ -31,9 +87,17 @@ export const useOrders = async () => {
         return now !== date
     })
 
+    const myOrders = orders.filter(o => o.driver_email === session?.email).sort((a, b) => {
+        if (a.current && !b.current) return -1;
+        if (!a.current && b.current) return 1;
+        return 0;
+    });
+
     return {
         orders: activeOrders,
         todayOrders,
-        plannedOrders
+        plannedOrders,
+        myOrders: myOrders
     }
 }
+

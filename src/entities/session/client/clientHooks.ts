@@ -8,5 +8,8 @@ export const useClientSession = () => {
 
     if (!token) return null
 
-    return jwtDecode<ISession>(token)
+    return {
+        ...jwtDecode<ISession>(token),
+        token: token
+    }
 }

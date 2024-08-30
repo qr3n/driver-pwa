@@ -1,13 +1,13 @@
 import { LogInParams, LogInResponse, SignUpParams, SignUpResponse } from "./types";
-import { api } from "@/shared/api";
+import { driverApi } from "@/shared/api";
 
 class AuthService {
     async login(params: LogInParams) {
-        return api.post<LogInResponse>("/login", params);
+        return driverApi.post<LogInResponse>("/login", params);
     }
 
     async signUp(params: SignUpParams) {
-        return api.post<SignUpResponse>("/sign-up", params);
+        return driverApi.post<SignUpResponse>("/sign-up", params);
     }
 }
 

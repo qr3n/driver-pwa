@@ -1,10 +1,15 @@
 'use client';
 
-import { DialogContent } from "@/shared/shadcn/ui/dialog";
-import { Dispatch, PropsWithChildren, SetStateAction, useState } from "react";
-import confetti from "canvas-confetti";
+import { DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
+import { Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react";
 import { BiCheckCircle } from "react-icons/bi";
 import { Button } from "@/shared/shadcn/ui/button";
+import { OrderDetailsContext } from "@/entities/order";
+import toast from "react-hot-toast";
+import { AiOutlineQuestion } from "react-icons/ai";
+import { GoQuestion } from "react-icons/go";
+import { BsQuestionCircle } from "react-icons/bs";
+import confetti from "canvas-confetti";
 
 interface IOptionProps extends PropsWithChildren {
     value: string;
@@ -13,7 +18,7 @@ interface IOptionProps extends PropsWithChildren {
 }
 
 const selectedStyle = {
-    backgroundColor: 'rgba(0,89,255,0.1)',
+    backgroundColor: 'rgba(0,89,255,0.12)',
     border: '1px solid rgba(0,89,255, 0.5)'
 }
 
@@ -27,7 +32,7 @@ const Option = (props: IOptionProps) => {
 
     return (
         <div
-            className={`transition-all relative w-full p-7 cursor-pointer rounded-2xl text-center flex items-center justify-center`}
+            className={`transition-all relative w-full p-7 cursor-pointer rounded-3xl text-center flex items-center justify-center`}
             style={selected ? selectedStyle : unselectedStyle}
             onMouseDown={() => props.setCurrent(props.value)}
         >
@@ -39,20 +44,35 @@ const Option = (props: IOptionProps) => {
 
 export const CreateOrderDiscountModal = () => {
     const [current, setCurrent] = useState('10')
+    const { setOrderDetailsModalOpen } = useContext(OrderDetailsContext)
 
     return (
-        <DialogContent className='bg-[#111] h-[100dvh] sm:h-[60dvh] sm:max-h-[80dvh] flex flex-col'>
+        <DialogContent className='bg-[#111] h-[100dvh] sm:h-[70dvh] sm:max-h-[80dvh] flex flex-col'>
             <>
-                <h1 className='text-3xl text-center font-semibold mb-4'>Предложить скидку</h1>
-                <div className='w-full h-full max-h-[calc(80dvh-130px)] flex flex-col gap-4 pb-4 pt-2 overflow-y-auto px-6'>
-                    <Option value={'10'} current={current} setCurrent={setCurrent}>10%</Option>
-                    <Option value={'15'} current={current} setCurrent={setCurrent}>15%</Option>
-                    <Option value={'25'} current={current} setCurrent={setCurrent}>25%</Option>
+                <h1 className='text-3xl text-center font-semibold mt-5'>Предложить скидку</h1>
+                <div className='flex -mt-2 items-center justify-center gap-1'>
+                    <p className='text-center text-sm text-[#999]'>Как это работает</p>
+                    <BsQuestionCircle className='text-[#999]'/>
                 </div>
-                <Button className='mt-4' onClick={() => confetti()}>Предложить</Button>
-                <p className='text-center text-sm text-[#999]'>До конца аукциона осталось <span className='text-white'>15 мин.</span>
-                </p>
-            </>
+                <div
+                    className='w-full mt-4 h-full max-h-[calc(80dvh-130px)] flex flex-col gap-4 pb-4 pt-2 overflow-y-auto px-6'>
+                        <Option value={'10'} current={current} setCurrent={setCurrent}>10%</Option>
+                        <Option value={'15'} current={current} setCurrent={setCurrent}>15%</Option>
+                        <Option value={'25'} current={current} setCurrent={setCurrent}>25%</Option>
+                    </div>
+                    <DialogClose>
+                        <Button className='mt-4 w-full' onClick={() => {
+                            confetti()
+                            toast.success(`Вы предложили скидку ${current}%`)
+                            setOrderDetailsModalOpen(false)
+                        }}>
+                            Предложить
+                        </Button>
+                    </DialogClose>
+                    <p className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
+                        className='text-white'>15 мин.</span>
+                    </p>
+                </>
         </DialogContent>
-    )
+)
 }

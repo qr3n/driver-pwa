@@ -33,8 +33,6 @@ export const LogInForm = () => {
     })
 
     const onSubmit = handleSubmit(data => {
-        alert('submit')
-
         mutate(data)
     })
 
@@ -59,7 +57,7 @@ export const LogInForm = () => {
     return (
         <form className='w-full' onSubmit={onSubmit}>
             <div className='w-full mt-4'>
-                <label className='text-sm text-[#ddd]'>asdasd</label>
+                <label className='text-sm text-[#ddd]'>Почта</label>
                 <Input type='email' className='mt-1' placeholder='Введите почту' {...register('email')}/>
             </div>
             <div className='w-full mt-4'>

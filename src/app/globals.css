@@ -169,7 +169,7 @@ input:-webkit-autofill:active{
   transition: all 1s, background-color 0.3s;
   content: "";
   position: absolute;
-  width: 400px;
+  width: 200px;
   height: 100%;
   background-color: rgb(33, 116, 255);
   top: 0;

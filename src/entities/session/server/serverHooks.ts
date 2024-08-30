@@ -7,5 +7,8 @@ export const useServerSession = () => {
 
     if (!token?.value) return null
 
-    return jwtDecode<ISession>(token.value)
+    return {
+        ...jwtDecode<ISession>(token.value),
+        token: token.value
+    }
 }

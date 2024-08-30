@@ -19,4 +19,8 @@ export interface IOrder {
     recipient_phone: string,
     courier_status: 'В пути' | 'Поиск курьера',
     tariff: 'day' | 'night',
+    auction: boolean,
+    timestamp: Date,
+    driver_email: string,
+    current: boolean
 }
