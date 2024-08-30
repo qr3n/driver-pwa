@@ -5,7 +5,8 @@ export interface TakeOrderParams {
 
 export interface DiscountOrderParams {
     token: string,
-    order_id: number
+    order_id: number,
+    discount: number
 }
 
 export interface MakeOrderCurrentParams {

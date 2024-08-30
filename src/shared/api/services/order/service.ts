@@ -7,7 +7,7 @@ class OrderService {
     }
 
     async discount(params: DiscountOrderParams) {
-        return baseApi.post('/order/discount', params)
+        return baseApi.post(`/order/discount?token=${params.token}`, params)
     }
 
     async makeCurrent(params: MakeOrderCurrentParams) {

@@ -50,7 +50,7 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                                 <p className='mt-1 font-medium'>{orderDetails.time_to_deliver}</p>
                             </div>
 
-                            { orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <><CreateOrderDiscount/><p
+                            { orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <><CreateOrderDiscount order_id={orderDetails.id}/><p
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
                                 className='text-white'>15 мин.</span></p></> : <DialogClose>
                                 <Button

@@ -1,15 +1,16 @@
 'use client';
 
 import { DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
-import { Dispatch, PropsWithChildren, SetStateAction, useContext, useState } from "react";
+import { Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from "react";
 import { BiCheckCircle } from "react-icons/bi";
 import { Button } from "@/shared/shadcn/ui/button";
 import { OrderDetailsContext } from "@/entities/order";
 import toast from "react-hot-toast";
-import { AiOutlineQuestion } from "react-icons/ai";
-import { GoQuestion } from "react-icons/go";
 import { BsQuestionCircle } from "react-icons/bs";
 import confetti from "canvas-confetti";
+import { useMutation } from "@tanstack/react-query";
+import { orderService } from "@/shared/api/services/order";
+import { useClientSession } from "@/entities/session/client";
 
 interface IOptionProps extends PropsWithChildren {
     value: string;
@@ -42,9 +43,22 @@ const Option = (props: IOptionProps) => {
     )
 }
 
-export const CreateOrderDiscountModal = () => {
+export const CreateOrderDiscountModal = ({ order_id }: { order_id: number }) => {
+    const session = useClientSession()
     const [current, setCurrent] = useState('10')
     const { setOrderDetailsModalOpen } = useContext(OrderDetailsContext)
+    const { mutate, isSuccess } = useMutation({
+        mutationFn: orderService.discount,
+        mutationKey: ['create_discount']
+    })
+
+    useEffect(() => {
+        if (isSuccess) {
+            confetti()
+            toast.success(`Вы предложили скидку ${current}%`)
+            setOrderDetailsModalOpen(false)
+        }
+    }, [isSuccess])
 
     return (
         <DialogContent className='bg-[#111] h-[100dvh] sm:h-[70dvh] sm:max-h-[80dvh] flex flex-col'>
@@ -61,11 +75,11 @@ export const CreateOrderDiscountModal = () => {
                         <Option value={'25'} current={current} setCurrent={setCurrent}>25%</Option>
                     </div>
                     <DialogClose>
-                        <Button className='mt-4 w-full' onClick={() => {
-                            confetti()
-                            toast.success(`Вы предложили скидку ${current}%`)
-                            setOrderDetailsModalOpen(false)
-                        }}>
+                        <Button className='mt-4 w-full' onClick={() => mutate({
+                            token: session?.token || '',
+                            order_id: order_id,
+                            discount: 25
+                        })}>
                             Предложить
                         </Button>
                     </DialogClose>

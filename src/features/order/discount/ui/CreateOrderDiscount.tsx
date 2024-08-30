@@ -1,7 +1,7 @@
 import { Dialog, DialogTrigger } from "@/shared/shadcn/ui/dialog";
 import { CreateOrderDiscountModal } from "./CreateOrderDiscountModal";
 
-export const CreateOrderDiscount = () => {
+export const CreateOrderDiscount = ({ order_id }: { order_id: number }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -11,7 +11,7 @@ export const CreateOrderDiscount = () => {
                     </button>
                 </div>
             </DialogTrigger>
-            <CreateOrderDiscountModal/>
+            <CreateOrderDiscountModal order_id={order_id}/>
         </Dialog>
     )
 }

@@ -17,6 +17,7 @@ export const UpdateOrdersWebsocket = () => {
             switch(data.command) {
                 case 'refresh_orders':
                     revalidateTagFrontend('orders')
+                    revalidateTagFrontend('current_orders')
             }
         }
     }, []);
