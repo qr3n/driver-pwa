@@ -13,3 +13,8 @@ export interface MakeOrderCurrentParams {
     token: string,
     order_id: number
 }
+
+export interface ChangeStatusParams {
+    order_id: number,
+    status: string
+}

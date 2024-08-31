@@ -16,6 +16,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/shared/shadcn/ui/dialog"
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
 import { PropsWithChildren } from "react";
+import { OrderNextStep } from "@/features/order/step/ui/OrderNextStep";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -43,9 +44,17 @@ const Step = (props: IStepProps) => {
         </div>
     )
 }
+const statuses = ['Курьер назначен', 'В пути', 'На погрузке', 'Выполняет', 'Заказ выполнен']
+
 
 export default async function ActiveOrder() {
     const currentOrder = await useCurrentOrder()
+
+    const filteredStatuses = statuses.map(status => ({
+        status,
+        completed: status !== currentOrder?.courier_status,
+        current: status === currentOrder?.courier_status
+    }));
 
     return currentOrder ? (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4 '>
@@ -85,16 +94,23 @@ export default async function ActiveOrder() {
                                 Начать следующий этап?
                             </h1>
                             <div className='mt-8 flex flex-col gap-6'>
-                                <Step completed>Взять заказ</Step>
-                                <Step completed>Отправиться в путь</Step>
-                                <Step completed>Отдать на погрузку</Step>
-                                <Step completed={false} current>Выполнить заказ</Step>
-                                <Step completed={false}>Закрыть заказ</Step>
+                                {statuses.map((status, index) => {
+                                    const isCurrent = status === currentOrder.courier_status;
+                                    const isNextToCurrent = index === statuses.indexOf(currentOrder.courier_status);
+
+                                    return (
+                                        <Step
+                                            key={index}
+                                            completed={isCurrent || (isNextToCurrent && !isCurrent)}
+                                            current={isNextToCurrent}
+                                        >
+                                            {status}
+                                        </Step>
+                                    );
+                                })}
                             </div>
                         </div>
-                        <Button className='w-full mt-12 place-self-end justify-self-end'>
-                            Подтвердить
-                        </Button>
+                        <OrderNextStep order_id={currentOrder.id} currentStatus={currentOrder.courier_status}/>
                     </DialogContent>
                     <DialogTrigger asChild>
                         <Button className='w-full mt-6 place-self-end justify-self-end'>

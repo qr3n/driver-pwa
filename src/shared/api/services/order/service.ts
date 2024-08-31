@@ -1,4 +1,4 @@
-import { DiscountOrderParams, MakeOrderCurrentParams, TakeOrderParams } from "./types";
+import { ChangeStatusParams, DiscountOrderParams, MakeOrderCurrentParams, TakeOrderParams } from "./types";
 import { baseApi } from "@/shared/api";
 
 class OrderService {
@@ -12,6 +12,10 @@ class OrderService {
 
     async makeCurrent(params: MakeOrderCurrentParams) {
         return baseApi.post(`/order/current?token=${params.token}`, params)
+    }
+
+    async changeStatus(params: ChangeStatusParams) {
+        return baseApi.put(`/courier-status?order_id=${params.order_id}&status=${params.status}`)
     }
 }
 
