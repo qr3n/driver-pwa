@@ -31,13 +31,11 @@ export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: stri
     }, [isError]);
 
     return (
-        <DialogClose>
-            <Button isLoading={isPending} className='w-full mt-12 place-self-end justify-self-end' onClick={() => mutate({
-                order_id: order_id,
-                status: statuses[statuses.indexOf(currentStatus) + 1]
-            })}>
-                Подтвердить
-            </Button>
-        </DialogClose>
+        <Button isLoading={isPending} className='w-full mt-12 place-self-end justify-self-end' onClick={() => mutate({
+            order_id: order_id,
+            status: statuses[statuses.indexOf(currentStatus) + 1]
+        })}>
+            Подтвердить
+        </Button>
     )
 }
