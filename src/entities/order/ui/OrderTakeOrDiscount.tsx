@@ -12,15 +12,14 @@ export const OrderTakeOrDiscount = (props: IProps) => {
     const [state, setState] = useState<'take' | 'discount'>()
     const { currentTime, isCurrentTimeLoading } = useCurrentTime()
     const [timeLeft, setTimeLeft] = useState(15)
-
-
+    
     useEffect(() => {
         if (currentTime) {
             const differenceInMilliseconds = Math.abs(currentTime.getTime() - props.createdAt.getTime());
             const difference = differenceInMilliseconds / 1000 / 60;
             console.log(difference)
 
-            setState(difference < 0 ? 'discount' : 'take');
+            setState(difference < 15 ? 'discount' : 'take');
         }
     }, [props.createdAt, currentTime]);
 

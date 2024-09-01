@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { calculateCost, calculateDistance, IOrder, OrderDetailsContext } from "@/entities/order";
 import { Dialog, DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
 import { Button } from "@/shared/shadcn/ui/button";
@@ -9,6 +9,7 @@ import { CreateOrderDiscount } from "@/features/order/discount";
 import { useClientSession } from "@/entities/session/client";
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import Image from "next/image";
+import { useCurrentTime } from "@/shared/hooks/useCurrentTime";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -20,10 +21,33 @@ const imagesMap = {
 
 export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
     const session = useClientSession()
+    const [state, setState] = useState<'take' | 'discount'>()
     const [orderDetails, setOrderDetails] = useState<IOrder>();
     const [takeOrDiscount, setTakeOrDiscount] = useState<'take' | 'discount'>();
     const [orderDetailsModalOpen, setOrderDetailsModalOpen] = useState(false)
     const [timeLeft, setTimeLeft] = useState(15)
+    const { currentTime, isCurrentTimeLoading } = useCurrentTime()
+
+    useEffect(() => {
+        if (currentTime && orderDetails) {
+            const differenceInMilliseconds = Math.abs(currentTime.getTime() - orderDetails.timestamp.getTime());
+            const difference = differenceInMilliseconds / 1000 / 60;
+
+            setTimeLeft(Math.round(difference))
+            setState(difference < 15 ? 'discount' : 'take');
+        }
+    }, [currentTime, orderDetails]);
+
+    useEffect(() => {
+        if (state === 'discount') {
+            const interval = setInterval(() => {
+                setTimeLeft(prev => (prev > 1) ? prev - 1 : prev)
+            }, 1000 * 60)
+
+            return () => clearInterval(interval)
+        }
+    }, [state]);
+
 
     return (
         <OrderDetailsContext.Provider value={{
@@ -91,7 +115,7 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                             {orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <>
                                 <CreateOrderDiscount order_id={orderDetails.id}/><p
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
-                                className='text-white'>15 мин.</span></p></> : <DialogClose>
+                                className='text-white'>{timeLeft} мин.</span></p></> : <DialogClose>
                                 <Button
                                     onClick={() => {
                                         toast.success('Вы успешно взяли заказ.')
