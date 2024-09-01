@@ -48,7 +48,6 @@ const statuses = ['Курьер назначен', 'В пути', 'На погр
 export default async function ActiveOrder() {
     const currentOrder = await useCurrentOrder()
 
-    console.log(currentOrder)
 
     return currentOrder ? (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4 '>
@@ -85,12 +84,10 @@ export default async function ActiveOrder() {
                     <DialogContent className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
                         <div className='mt-8'>
                             <h1 className='text-3xl text-center font-semibold '>
-                                Начать следующий этап? {currentOrder.courier_status}
+                                Начать следующий этап?
                             </h1>
                             <div className='mt-8 flex flex-col gap-6'>
                                 {statuses.map((status, index) => {
-                                    const newStatus = status === undefined ? 'Поиск курьера' : status
-
                                     const isCurrent = status === currentOrder.courier_status;
                                     const isNextToCurrent = index === statuses.indexOf(currentOrder.courier_status);
 
