@@ -79,6 +79,24 @@ export default async function ActiveOrder() {
                     <p className='mt-1 font-medium'>{currentOrder.time_to_take}</p>
                     <h1 className='text-xl text-[#999] mt-4'>Когда доставить</h1>
                     <p className='mt-1 font-medium'>{currentOrder.time_to_deliver}</p>
+
+                    <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
+
+                    <h1 className='text-2xl text-white font-semibold mt-6'>Габариты</h1>
+                    <h1 className='text-xl text-[#999] mt-4'>Длина</h1>
+                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[0]}</p>
+                    <h1 className='text-xl text-[#999] mt-4'>Ширина</h1>
+                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[1]}</p>
+                    <h1 className='text-xl text-[#999] mt-4'>Высота</h1>
+                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[2]}</p>
+                    <h1 className='text-xl text-[#999] mt-4'>Количество</h1>
+                    <p className='mt-1 font-medium'>{currentOrder.count === '0' ? '1' : currentOrder.count}</p>
+
+                    <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
+
+                    <h1 className='text-2xl text-white font-semibold mt-6'>Дополнительно</h1>
+                    <h1 className='text-xl text-[#999] mt-4'>Комментарий</h1>
+                    <p className='mt-1 font-medium'>{currentOrder.comment || 'Отсутствует'}</p>
                 </div>
                 <Dialog>
                     <DialogContent className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
