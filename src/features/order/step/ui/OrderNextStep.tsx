@@ -17,8 +17,15 @@ export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: stri
 
     useEffect(() => {
         if (isSuccess) {
-            toast.success('Вы перешли на следующий этап')
             revalidateTagFrontend('current_orders')
+
+            if (currentStatus === 'Заказ выполнен') {
+                toast.success('Спасибо за работу!')
+            }
+
+            else {
+                toast.success('Вы перешли на следующий этап')
+            }
         }
     }, [isSuccess]);
 

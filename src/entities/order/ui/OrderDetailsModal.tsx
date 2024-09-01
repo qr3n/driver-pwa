@@ -7,6 +7,16 @@ import { Button } from "@/shared/shadcn/ui/button";
 import toast from "react-hot-toast";
 import { CreateOrderDiscount } from "@/features/order/discount";
 import { useClientSession } from "@/entities/session/client";
+import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
+import Image from "next/image";
+
+const imagesMap = {
+    'Яндекс маркет': yandexIcon,
+    'Ozon': ozonIcon,
+    'AliExpress': aliIcon,
+    'Lamoda': lamodaIcon,
+    'Wildberries': wildberriesIcon
+}
 
 export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
     const session = useClientSession()
@@ -31,10 +41,20 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                     { orderDetails && (
                         <>
                             <div className='mt-5'>
-                                <h1 className='text-3xl text-center font-semibold'>{calculateCost(orderDetails.cost, orderDetails.tariff)} руб.</h1>
+                                <div className='flex gap-4 items-center justify-center'>
+                                    <Image
+                                        src={orderDetails.cargo === 'anything' ? questionIcon : imagesMap[orderDetails.warehouse]}
+                                        placeholder='blur'
+                                        alt={'icon'}
+                                        width={36}
+                                        height={36}
+                                        className='rounded-xl object-cover h-max'
+                                    />
+                                    <h1 className='text-3xl text-center font-semibold'>{calculateCost(orderDetails.cost, orderDetails.tariff)} руб.</h1>
+                                </div>
                                 <h1 className='text-center text-[#999]'>~{calculateDistance(orderDetails.cost)} км</h1>
                             </div>
-                            <div className='w-full h-full max-h-[calc(80dvh-150px)] pb-4 pt-2 overflow-y-auto px-6'>
+                            <div className='w-full h-full max-h-[calc(100dvh-150px)] sm:max-h-[calc(80dvh-150px)] pb-4 pt-2 overflow-y-auto px-6'>
                                 <h1 className='text-2xl text-white font-semibold'>Основное</h1>
                                 <h1 className='text-xl text-[#999]  mt-4'>Откуда забрать</h1>
                                 <p className='mt-1 font-medium'>{orderDetails.addr_from}</p>
@@ -48,9 +68,28 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                                 <p className='mt-1 font-medium'>{orderDetails.time_to_take}</p>
                                 <h1 className='text-xl text-[#999] mt-4'>Когда доставить</h1>
                                 <p className='mt-1 font-medium'>{orderDetails.time_to_deliver}</p>
+
+                                <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
+
+                                <h1 className='text-2xl text-white font-semibold mt-6'>Габариты</h1>
+                                <h1 className='text-xl text-[#999] mt-4'>Длина</h1>
+                                <p className='mt-1 font-medium'>{orderDetails.dimensions.split(' ')[0]}</p>
+                                <h1 className='text-xl text-[#999] mt-4'>Ширина</h1>
+                                <p className='mt-1 font-medium'>{orderDetails.dimensions.split(' ')[1]}</p>
+                                <h1 className='text-xl text-[#999] mt-4'>Высота</h1>
+                                <p className='mt-1 font-medium'>{orderDetails.dimensions.split(' ')[2]}</p>
+                                <h1 className='text-xl text-[#999] mt-4'>Количество</h1>
+                                <p className='mt-1 font-medium'>{orderDetails.count === '0' ? '1' : orderDetails.count}</p>
+
+                                <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
+
+                                <h1 className='text-2xl text-white font-semibold mt-6'>Дополнительно</h1>
+                                <h1 className='text-xl text-[#999] mt-4'>Комментарий</h1>
+                                <p className='mt-1 font-medium'>{orderDetails.comment || 'Отсутствует'}</p>
                             </div>
 
-                            { orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <><CreateOrderDiscount order_id={orderDetails.id}/><p
+                            {orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <>
+                                <CreateOrderDiscount order_id={orderDetails.id}/><p
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
                                 className='text-white'>15 мин.</span></p></> : <DialogClose>
                                 <Button

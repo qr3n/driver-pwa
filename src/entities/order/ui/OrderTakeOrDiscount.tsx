@@ -20,7 +20,7 @@ export const OrderTakeOrDiscount = (props: IProps) => {
             const difference = differenceInMilliseconds / 1000 / 60;
             console.log(difference)
 
-            setState(difference < 15 ? 'discount' : 'take');
+            setState(difference < 0 ? 'discount' : 'take');
         }
     }, [props.createdAt, currentTime]);
 
