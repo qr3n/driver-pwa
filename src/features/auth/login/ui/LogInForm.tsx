@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { z } from "zod"
+import { Loader2 } from "lucide-react";
+import * as React from "react";
 
 const formSchema = z.object({
     email: z.string(),
@@ -54,7 +56,7 @@ export const LogInForm = () => {
         }
     }, [cookies, data, isSuccess, router]);
 
-    return (
+    return isSuccess ? <div className='mt-4'><Loader2 className="text-white h-4 w-4 animate-spin" /></div> : (
         <form className='w-full' onSubmit={onSubmit}>
             <div className='w-full mt-4'>
                 <label className='text-sm text-[#ddd]'>Почта</label>

@@ -5,6 +5,7 @@ import { useClientSession } from "@/entities/session/client";
 import { usePathname } from "next/navigation";
 import { RiMapPinLine } from "react-icons/ri";
 import Link from "next/link";
+import { FaCar } from "react-icons/fa";
 
 const activeStyle = {
     backgroundColor: '#444',
@@ -31,12 +32,6 @@ export const Menu = () => {
                 </div>
             </Link>
 
-            {/*<Link href={'/orders/current'}>*/}
-            {/*    <div className='bg-[#333] p-2.5 rounded-2xl w-max h-max cursor-pointer'>*/}
-            {/*        <FiHome className='w-7 h-7 text-[#999]'/>*/}
-            {/*    </div>*/}
-            {/*</Link>*/}
-
             <Link href={'/orders/active'}>
                 <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname === '/orders/active' ? activeStyle : inactiveStyle}>
                     <RiMapPinLine className='w-7 h-7'/>
@@ -47,6 +42,13 @@ export const Menu = () => {
                 <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'
                      style={pathname.includes('/profile') ? activeStyle : inactiveStyle}>
                     <FiUser className='w-7 h-7'/>
+                </div>
+            </Link>
+
+            <Link href={'/car'}>
+                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'
+                     style={pathname.includes('/car') ? activeStyle : inactiveStyle}>
+                    <FaCar className='w-7 h-7'/>
                 </div>
             </Link>
         </div>

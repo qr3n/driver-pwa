@@ -73,12 +73,15 @@ export const useOrders = async () => {
 
     const orders = newNotSortedOrders.reverse()
 
-    const activeOrders = orders.filter(o => (o.courier_status === 'Поиск курьера' || o.courier_status === null) && o.driver_email !== session?.email)
+    const activeOrders = orders.filter(o => (
+        (o.courier_status === 'Поиск курьера' || o.courier_status === null) && (o.status !== 'disabled')
+    ) && o.driver_email !== session?.email)
 
     const now = createDate(new Date())
 
     const todayOrders = activeOrders.filter(order => {
         const date = order.time_to_take.replace(/\s.*/, "");
+
         return now === date
     })
 
@@ -86,6 +89,53 @@ export const useOrders = async () => {
         const date = order.time_to_take.replace(/\s.*/, "");
         return now !== date
     })
+
+    const extractDateTime = (time_to_take: string): Date | null => {
+        const dateMatch = time_to_take.match(/(\d{2})\.(\d{2})\.(\d{4}) с (\d{2}):(\d{2})/);
+        if (dateMatch) {
+            const [_, day, month, year, hour, minute] = dateMatch;
+            return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
+        }
+        return null;
+    };
+
+    todayOrders.sort((a, b) => {
+        const isASooner = a.time_to_take.includes("как можно быстрее");
+        const isBSooner = b.time_to_take.includes("как можно быстрее");
+
+        if (isASooner && !isBSooner) {
+            return -1; // a выше
+        } else if (!isASooner && isBSooner) {
+            return 1; // b выше
+        } else if (!isASooner && !isBSooner) {
+            const dateA = extractDateTime(a.time_to_take);
+            const dateB = extractDateTime(b.time_to_take);
+
+            if (dateA && dateB) {
+                return dateA.getTime() - dateB.getTime();
+            }
+        }
+        return 0;
+    });
+
+    plannedOrders.sort((a, b) => {
+        const isASooner = a.time_to_take.includes("как можно быстрее");
+        const isBSooner = b.time_to_take.includes("как можно быстрее");
+
+        if (isASooner && !isBSooner) {
+            return -1; // a выше
+        } else if (!isASooner && isBSooner) {
+            return 1; // b выше
+        } else if (!isASooner && !isBSooner) {
+            const dateA = extractDateTime(a.time_to_take);
+            const dateB = extractDateTime(b.time_to_take);
+
+            if (dateA && dateB) {
+                return dateA.getTime() - dateB.getTime();
+            }
+        }
+        return 0;
+    });
 
     const myOrders = orders.filter(o => o.driver_email === session?.email).sort((a, b) => {
         if (a.current && !b.current) return -1;
