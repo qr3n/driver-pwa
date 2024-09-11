@@ -14,7 +14,7 @@ import { BiCheckCircle } from "react-icons/bi";
 
 interface IProps {
     order: IOrder,
-    currentOrder: IOrder | null
+    currentOrder: IOrder | null,
 }
 
 export const TakeOrDiscountButton = (props: IProps) => {
@@ -34,10 +34,10 @@ export const TakeOrDiscountButton = (props: IProps) => {
     if (props.order.driver_email === session?.email) {
         return props.currentOrder ?  (
             props.currentOrder.id === props.order.id ? (
-                <Link href={'/orders/active'} className='z-20 w-full sm:w-max'>
+                <Link href={'/orders/active'} className='z-50 w-full'>
                     <Button
                         className='text-white font-medium p-4 z-20 w-full'>
-                        Выполнить
+                        Ваш текущий заказ
                     </Button>
                 </Link>
             ) : (

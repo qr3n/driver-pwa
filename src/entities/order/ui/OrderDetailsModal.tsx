@@ -3,13 +3,13 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { calculateCost, calculateDistance, IOrder, OrderDetailsContext } from "@/entities/order";
 import { Dialog, DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
-import { Button } from "@/shared/shadcn/ui/button";
-import toast from "react-hot-toast";
 import { CreateOrderDiscount } from "@/features/order/discount";
 import { useClientSession } from "@/entities/session/client";
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import Image from "next/image";
 import { useCurrentTime } from "@/shared/hooks/useCurrentTime";
+import { TakeOrDiscountButton } from "@/entities/order/ui/TakeOrDiscountButton";
+import { OrderTakeOrDiscount } from "@/entities/order/ui/OrderTakeOrDiscount";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -19,7 +19,11 @@ const imagesMap = {
     'Wildberries': wildberriesIcon
 }
 
-export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
+interface IProps extends PropsWithChildren {
+    currentOrder: IOrder | null
+}
+
+export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
     const session = useClientSession()
     const [state, setState] = useState<'take' | 'discount'>()
     const [orderDetails, setOrderDetails] = useState<IOrder>();
@@ -116,14 +120,9 @@ export const OrderDetailsModal = ({ children }: PropsWithChildren) => {
                                 <CreateOrderDiscount order_id={orderDetails.id}/><p
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
                                 className='text-white'>{timeLeft} мин.</span></p></> : <DialogClose>
-                                <Button
-                                    onClick={() => {
-                                        toast.success('Вы успешно взяли заказ.')
-                                    }}
-                                    className='text-white w-full font-semibold p-4 z-20'
-                                >
-                                    Забронировать
-                                </Button>
+                                <OrderTakeOrDiscount createdAt={orderDetails.timestamp}>
+                                    <TakeOrDiscountButton order={orderDetails} currentOrder={currentOrder}/>
+                                </OrderTakeOrDiscount>
                             </DialogClose>) }
                         </>
                     )}

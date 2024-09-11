@@ -38,7 +38,7 @@ export const TakeOrder = ({ order_id }: { order_id: number }) => {
                 token: session?.token,
                 order_id: order_id
             })}
-            className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
+            className='text-white w-full bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
         >
             Забронировать
         </Button>
