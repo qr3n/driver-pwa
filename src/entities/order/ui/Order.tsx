@@ -21,7 +21,7 @@ export const Order = async (data: IOrder) => {
             className='relative cursor-pointer w-full bg-[#151515] flex flex-col-reverse sm:flex-row-reverse sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
             <OrderTakeOrDiscount createdAt={data.timestamp}>
                 <OpenOrderDetails {...data}/>
-                <div className='sm:max-w-min'>
+                <div className='sm:max-w-min z-20'>
                     <TakeOrDiscountButton order={data} currentOrder={currentOrder}/>
                 </div>
             </OrderTakeOrDiscount>
