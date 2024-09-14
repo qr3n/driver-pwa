@@ -26,7 +26,7 @@ export const Order = async (data: IOrder) => {
                 </div>
             </OrderTakeOrDiscount>
 
-            <div className='flex gap-4 sm:justify-center'>
+            <div className='flex gap-4 items-center sm:justify-center'>
                 <Image
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
                     placeholder='blur'
@@ -39,11 +39,9 @@ export const Order = async (data: IOrder) => {
                     <h1 className='font-semibold'>
                         {calculateCost(data.cost, data.tariff)} руб.
                     </h1>
-
-                    <p className='text-[#999] text-sm mt-1'>
-                        ~{calculateDistance(data.cost)} км
+                    <p className='p-3 bg-[#333] border border-[#555] w-full max-w-[400px] rounded-xl text-[#ddd] font-medium text-sm mt-1 '>
+                        <span className='font-normal text-[#999]'>От</span> {data.addr_from.replace('г Москва,', '')} <span className='font-normal text-[#999]'>до</span> {data.addr_to.replace('г Москва,', '')}
                     </p>
-
                 </div>
             </div>
         </div>

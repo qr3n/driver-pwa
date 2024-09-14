@@ -48,7 +48,6 @@ const statuses = ['Курьер назначен', 'В пути', 'На погр
 export default async function ActiveOrder() {
     const currentOrder = await useCurrentOrder()
 
-
     return currentOrder ? (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4 '>
             <div className='flex flex-col w-full sm:max-w-lg'>
@@ -67,6 +66,9 @@ export default async function ActiveOrder() {
                 </div>
                 <div className='w-full h-full max-h-[calc(80dvh-220px)] pb-4 pt-5 overflow-y-auto px-6'>
                     <h1 className='text-2xl text-white font-semibold'>Основное</h1>
+                    <h1 className='text-xl text-[#999]  mt-4'>Этап</h1>
+                    <h1 className='text-center bg-blue-500 mt-1.5 text-white font-medium text-xs px-4 py-1 w-max rounded-full'>{currentOrder.courier_status}</h1>
+
                     <h1 className='text-xl text-[#999]  mt-4'>Откуда забрать</h1>
                     <p className='mt-1 font-medium'>{currentOrder.addr_from}</p>
                     <h1 className='text-xl text-[#999]  mt-4'>Куда доставить</h1>
@@ -99,7 +101,8 @@ export default async function ActiveOrder() {
                     <p className='mt-1 font-medium'>{currentOrder.comment || 'Отсутствует'}</p>
                 </div>
                 <Dialog>
-                    <DialogContent className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
+                    <DialogContent
+                        className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
                         <div className='mt-8'>
                             <h1 className='text-3xl text-center font-semibold '>
                                 Начать следующий этап?

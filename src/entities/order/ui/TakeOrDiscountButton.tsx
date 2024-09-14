@@ -42,10 +42,10 @@ export const TakeOrDiscountButton = (props: IProps) => {
                 </Link>
             ) : (
                 props.order.status === 'active' ? <Button
-                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20'>
+                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20 w-full sm:w-max'>
                     Это ваш заказ
                 </Button> : <Button
-                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20'>
+                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20 w-full sm:w-max'>
                     <CheckCircleIcon/>
                 </Button>
             )
