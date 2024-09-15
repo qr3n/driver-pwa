@@ -43,7 +43,7 @@ export const Order = async (data: IOrder) => {
                         {data.addr_from.replace('г Москва,', '')}
                         <span className='font-normal text-[#aaa]'> до</span> {data.addr_to.replace('г Москва,', '')}
                     </p>
-                    <h1 className='text-center bg-blue-900  text-white font-medium text-xs px-4 py-1 mt-4 w-max rounded-full'>
+                    <h1 className='text-center bg-blue-900  text-white font-medium text-xs px-4 py-1 mt-3 w-max rounded-full'>
                         {calculateCost(data.cost, data.tariff)} руб.
                     </h1>
                 </div>
