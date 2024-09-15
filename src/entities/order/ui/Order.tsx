@@ -18,7 +18,7 @@ export const Order = async (data: IOrder) => {
 
     return (
         <div
-            className='relative cursor-pointer w-full bg-[#151515] flex flex-col-reverse sm:flex-row-reverse sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-2xl'>
+            className='relative cursor-pointer w-full bg-[#151515] flex flex-col-reverse sm:flex-row-reverse sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-3xl'>
             <OrderTakeOrDiscount createdAt={data.timestamp}>
                 <OpenOrderDetails {...data}/>
                 <div className='sm:max-w-min z-20'>
@@ -31,17 +31,21 @@ export const Order = async (data: IOrder) => {
                     src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
                     placeholder='blur'
                     alt={'icon'}
-                    width={42}
-                    height={42}
+                    width={48}
+                    height={48}
                     className='rounded-xl object-cover h-max'
                 />
                 <div>
                     <h1 className='font-semibold'>
-                        {calculateCost(data.cost, data.tariff)} руб.
+                        {data.time_to_take}
                     </h1>
                     <p className='p-3 bg-[#333] border border-[#555] w-full max-w-[400px] rounded-xl text-[#ddd] font-medium text-sm mt-1 '>
-                        <span className='font-normal text-[#999]'>От</span> {data.addr_from.replace('г Москва,', '')} <span className='font-normal text-[#999]'>до</span> {data.addr_to.replace('г Москва,', '')}
+                        {data.addr_from.replace('г Москва,', '')}
+                        <span className='font-normal text-[#aaa]'> до</span> {data.addr_to.replace('г Москва,', '')}
                     </p>
+                    <h1 className='text-center bg-blue-900  text-white font-medium text-xs px-4 py-1 mt-4 w-max rounded-full'>
+                        {calculateCost(data.cost, data.tariff)} руб.
+                    </h1>
                 </div>
             </div>
         </div>
