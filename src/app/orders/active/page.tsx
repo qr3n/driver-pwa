@@ -3,7 +3,6 @@ import {
     aliIcon,
     bgDesktop,
     bgMobile,
-    dolphin,
     dolphinWithGlasses,
     lamodaIcon,
     ozonIcon, questionIcon, wildberriesIcon,
@@ -68,6 +67,10 @@ export default async function ActiveOrder() {
                     <h1 className='text-2xl text-white font-semibold'>Основное</h1>
                     <h1 className='text-xl text-[#999]  mt-4'>Этап</h1>
                     <h1 className='text-center bg-blue-500 mt-1.5 text-white font-medium text-xs px-4 py-1 w-max rounded-full'>{currentOrder.courier_status}</h1>
+                    <h1 className='text-xl text-[#999]  mt-4'>Номер отправителя</h1>
+                    <a href={`tel:+7${currentOrder.sender_phone.replace('+7', '')}`} className='mt-1 font-medium'>+7{currentOrder.sender_phone.replace('+7', '')}</a>
+                    <h1 className='text-xl text-[#999]  mt-4'>Номер получателя</h1>
+                    <a href={`tel:+7${currentOrder.recipient_phone.replace('+7', '')}`} className='mt-1 font-medium'>+7{currentOrder.recipient_phone.replace('+7', '')}</a>
 
                     <h1 className='text-xl text-[#999]  mt-4'>Откуда забрать</h1>
                     <p className='mt-1 font-medium'>{currentOrder.addr_from}</p>
@@ -105,7 +108,7 @@ export default async function ActiveOrder() {
                         className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
                         <div className='mt-8'>
                             <h1 className='text-3xl text-center font-semibold '>
-                                Начать следующий этап?
+                            Начать следующий этап?
                             </h1>
                             <div className='mt-8 flex flex-col gap-6'>
                                 {statuses.map((status, index) => {
@@ -150,7 +153,7 @@ export default async function ActiveOrder() {
                     Активного заказа пока нет
                 </h1>
                 <h2 className='text-sm sm:text-base text-[#999] mt-1'>
-                    Скорее выберите его <Link href='/orders'><span className='text-blue-500 cursor-pointer'>тут!</span></Link>
+                    Скорее выберите его <Link href={'/orders'}><span className='text-blue-500 cursor-pointer'>тут!</span></Link>
                 </h2>
             </div>
         </div>
