@@ -89,12 +89,6 @@ export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
                                 <p className='mt-1 font-medium'>{orderDetails.addr_from}</p>
                                 <h1 className='text-xl text-[#999]  mt-4'>Куда доставить</h1>
                                 <p className='mt-1 font-medium'>{orderDetails.addr_to}</p>
-                                <h1 className='text-xl text-[#999]  mt-4'>Номер отправителя</h1>
-                                <a href={`tel:${orderDetails.sender_phone.replace('+7', '')}`}
-                                   className='text-blue-400 mt-1 font-medium'>+7{orderDetails.sender_phone}</a>
-                                <h1 className='text-xl text-[#999]  mt-4'>Номер получателя</h1>
-                                <a href={`tel:${orderDetails.recipient_phone.replace('+7', '')}`}
-                                   className='text-blue-400 mt-1 font-medium'>+7{orderDetails.recipient_phone}</a>
 
                                 <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
 
