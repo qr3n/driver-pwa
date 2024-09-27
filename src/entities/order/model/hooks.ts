@@ -137,7 +137,13 @@ export const useOrders = async () => {
         return 0;
     });
 
-    const myOrders = orders.filter(o => o.driver_email === session?.email).sort((a, b) => {
+    const myOrders = orders.filter(o => o.driver_email === session?.email && o.status !== 'disabled' && o.courier_status !== 'Заказ выполнен').sort((a, b) => {
+        if (a.current && !b.current) return -1;
+        if (!a.current && b.current) return 1;
+        return 0;
+    });
+
+    const completedOrders = orders.filter(o => o.driver_email === session?.email && o.status === 'disabled' && o.courier_status === 'Заказ выполнен').sort((a, b) => {
         if (a.current && !b.current) return -1;
         if (!a.current && b.current) return 1;
         return 0;
@@ -147,7 +153,8 @@ export const useOrders = async () => {
         orders: activeOrders,
         todayOrders,
         plannedOrders,
-        myOrders: myOrders
+        myOrders: myOrders,
+        completedOrders
     }
 }
 

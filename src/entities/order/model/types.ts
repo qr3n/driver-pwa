@@ -17,7 +17,7 @@ export interface IOrder {
     count: string,
     sender_phone: string,
     recipient_phone: string,
-    courier_status: 'В пути' | 'Поиск курьера',
+    courier_status: 'В пути' | 'Поиск курьера' | 'Заказ выполнен',
     tariff: 'day' | 'night',
     auction: boolean,
     timestamp: Date,
