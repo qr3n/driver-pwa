@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { FaCar } from "react-icons/fa";
 import { TbSteeringWheel } from "react-icons/tb";
+import { CheckCircleIcon } from "lucide-react";
 
 const activeStyle = {
     backgroundColor: '#444',
@@ -38,17 +39,24 @@ export const Menu = () => {
                 </div>
             </Link>
 
-            <Link href={'/profile'}>
-                <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'
-                     style={pathname.includes('/profile') ? activeStyle : inactiveStyle}>
-                    <FiUser className='w-7 h-7'/>
-                </div>
-            </Link>
+            {/*<Link href={'/profile'}>*/}
+            {/*    <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'*/}
+            {/*         style={pathname.includes('/profile') ? activeStyle : inactiveStyle}>*/}
+            {/*        <FiUser className='w-7 h-7'/>*/}
+            {/*    </div>*/}
+            {/*</Link>*/}
 
-            <Link href={'/car'}>
+            {/*<Link href={'/car'}>*/}
+            {/*    <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'*/}
+            {/*         style={pathname.includes('/car') ? activeStyle : inactiveStyle}>*/}
+            {/*        <FaCar className='w-7 h-7'/>*/}
+            {/*    </div>*/}
+            {/*</Link>*/}
+
+            <Link href={'/orders/completed'}>
                 <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer'
-                     style={pathname.includes('/car') ? activeStyle : inactiveStyle}>
-                    <FaCar className='w-7 h-7'/>
+                     style={pathname.includes('/orders/completed') ? activeStyle : inactiveStyle}>
+                    <CheckCircleIcon className='w-7 h-7'/>
                 </div>
             </Link>
         </div>

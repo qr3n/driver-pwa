@@ -6,6 +6,7 @@ import { metadata } from "@/app/meta";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { CookiesProvider } from "next-client-cookies/server";
+import { SliderMenu } from "@/widgets/slider-menu/ui/SliderMenu";
 export { metadata }
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                       {children}
                   </div>
                   <Menu/>
+                  <SliderMenu/>
               </div>
           </CookiesProvider>
       </Providers>
