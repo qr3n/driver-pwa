@@ -10,9 +10,12 @@ import Link from "next/link"
 import { FaUser } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useServerSession } from "@/entities/session/server";
 
 export const SliderMenu = () => {
-    return (
+    const session = useServerSession()
+
+    return session ? (
         <Sheet>
             <SheetTrigger asChild>
                 <div
@@ -46,5 +49,5 @@ export const SliderMenu = () => {
                 </Link>
             </SheetContent>
         </Sheet>
-    )
+    ) : <></>
 }
