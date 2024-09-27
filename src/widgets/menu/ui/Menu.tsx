@@ -3,9 +3,9 @@
 import { FiHome, FiUser } from "react-icons/fi";
 import { useClientSession } from "@/entities/session/client";
 import { usePathname } from "next/navigation";
-import { RiMapPinLine } from "react-icons/ri";
 import Link from "next/link";
 import { FaCar } from "react-icons/fa";
+import { TbSteeringWheel } from "react-icons/tb";
 
 const activeStyle = {
     backgroundColor: '#444',
@@ -34,7 +34,7 @@ export const Menu = () => {
 
             <Link href={'/orders/active'}>
                 <div className='hover:bg-[#444] p-2.5 rounded-2xl w-max h-max cursor-pointer' style={pathname === '/orders/active' ? activeStyle : inactiveStyle}>
-                    <RiMapPinLine className='w-7 h-7'/>
+                    <TbSteeringWheel className='w-7 h-7'/>
                 </div>
             </Link>
 

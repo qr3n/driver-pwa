@@ -39,7 +39,7 @@ export const useCurrentOrder = async () => {
 
     const data = await fetch(
         `https://postavan.com/api/order/current?token=${session?.token}`,
-        { next: { tags: ['current_orders'] } }
+        { cache: 'no-cache', next: { tags: ['current_orders'] } }
     )
 
     const order: IOrder | null = await data.json()
@@ -55,7 +55,7 @@ export const useOrders = async () => {
 
     const data = await fetch(
         'https://postavan.com/api/orders/all?admin_token=secret',
-        { next: { tags: ['orders'] } }
+        { cache: 'no-cache', next: { tags: ['orders'] } }
     )
 
     const notSortedOrders: INotParsedOrder[] = await data.json()

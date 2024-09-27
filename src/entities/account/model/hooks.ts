@@ -5,7 +5,7 @@ import { IAccountInfo } from "@/entities/account/model/types";
 export const useAccountInfo = async () => {
     const session = useServerSession()
 
-    const data = await fetch(`https://postavan.com/api/driver-info?driver_email=${session?.email}`, {next: { tags: ['info'] }})
+    const data = await fetch(`https://postavan.com/api/driver-info?driver_email=${session?.email}`, {cache: 'no-cache', next: { tags: ['info'] }})
 
     const car: IAccountInfo | null = await data.json()
 
