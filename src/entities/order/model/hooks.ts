@@ -143,7 +143,7 @@ export const useOrders = async () => {
         return 0;
     });
 
-    const completedOrders = orders.filter(o => o.driver_email === session?.email && o.status === 'disabled' && o.courier_status === 'Заказ выполнен').sort((a, b) => {
+    const completedOrders = orders.filter(o => o.driver_email === session?.email && (o.status === 'disabled' || o.courier_status === 'Заказ выполнен')).sort((a, b) => {
         if (a.current && !b.current) return -1;
         if (!a.current && b.current) return 1;
         return 0;

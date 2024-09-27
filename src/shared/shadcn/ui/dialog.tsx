@@ -5,10 +5,25 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 
 import { cn } from "@/shared/shadcn/lib/utils"
+import { DialogProps, DialogTriggerProps } from "@radix-ui/react-dialog";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const Dialog = DialogPrimitive.Root
+const Dialog = (props: DialogProps) => {
+    const params = useSearchParams()
 
-const DialogTrigger = DialogPrimitive.Trigger
+    return (
+        <DialogPrimitive.Root {...props} open={props.open && !!params.get('modal')}/>
+    )
+}
+
+const DialogTrigger = (props: DialogTriggerProps) => {
+    const router = useRouter()
+    const pathname = usePathname()
+
+    return <DialogPrimitive.Trigger {...props} onClick={() => {
+        router.push(`${pathname}?modal=open`)
+    }}/>
+}
 
 const DialogPortal = DialogPrimitive.Portal
 
