@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { SheetClose } from "@/shared/shadcn/ui/sheet";
 
+
 export const Logout = () => {
     const cookies = useCookies()
     const router = useRouter()
