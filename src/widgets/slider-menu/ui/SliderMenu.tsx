@@ -11,6 +11,7 @@ import { FaUser } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useServerSession } from "@/entities/session/server";
+import { Logout } from "@/features/auth/logout/ui/Logout";
 
 export const SliderMenu = () => {
     const session = useServerSession()
@@ -47,6 +48,8 @@ export const SliderMenu = () => {
                         </div>
                     </SheetClose>
                 </Link>
+
+                <Logout/>
             </SheetContent>
         </Sheet>
     ) : <></>
