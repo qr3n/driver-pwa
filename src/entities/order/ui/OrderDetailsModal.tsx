@@ -89,6 +89,16 @@ export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
                                 <p className='mt-1 font-medium'>{orderDetails.addr_from}</p>
                                 <h1 className='text-xl text-[#999]  mt-4'>Куда доставить</h1>
                                 <p className='mt-1 font-medium'>{orderDetails.addr_to}</p>
+                                {orderDetails.driver_email === session?.email && (
+                                    <>
+                                        <h1 className='text-xl text-[#999]  mt-4'>Номер отправителя</h1>
+                                        <a href={`tel:+7${orderDetails.sender_phone.replace('+7', '')}`}
+                                           className='text-blue-400 mt-1 font-medium'>+7{orderDetails.sender_phone.replace('+7', '')}</a>
+                                        <h1 className='text-xl text-[#999]  mt-4'>Номер получателя</h1>
+                                        <a href={`tel:+7${orderDetails.recipient_phone.replace('+7', '')}`}
+                                           className='text-blue-400 mt-1 font-medium'>+7{orderDetails.recipient_phone.replace('+7', '')}</a>
+                                    </>
+                                )}
 
                                 <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
 
@@ -122,7 +132,7 @@ export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
                                 className='text-white'>{timeLeft} мин.</span></p></> : <DialogClose>
                                 <OrderTakeOrDiscount createdAt={orderDetails.timestamp}>
-                                    <TakeOrDiscountButton order={orderDetails} currentOrder={currentOrder}/>
+                                <TakeOrDiscountButton order={orderDetails} currentOrder={currentOrder}/>
                                 </OrderTakeOrDiscount>
                             </DialogClose>) }
                         </>
