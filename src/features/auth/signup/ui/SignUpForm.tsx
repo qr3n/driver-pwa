@@ -57,20 +57,22 @@ export const SignUpForm = () => {
         }
     }, [cookies, data, isSuccess, router]);
 
-    return isSuccess ? <div className='mt-4'><Loader2 className="text-white h-4 w-4 animate-spin"/></div> : (
-        <form className='w-full' onSubmit={onSubmit}>
-            <div className='w-full mt-4'>
-                <label className='text-sm text-[#ddd]'>Почта</label>
-                <Input type='email' className='mt-1' placeholder='Введите почту' {...register('email')}/>
-            </div>
-            <div className='w-full mt-4'>
-                <label className='text-sm text-[#ddd]'>Пароль</label>
-                <Input type='password' className='mt-1' placeholder='Введите пароль' {...register('password')}/>
-            </div>
-            <Button className='w-full mt-8' isLoading={isPending} onClick={onSubmit}>
-                Продолжить
-            </Button>
-            <input type='submit' className='hidden'/>
-        </form>
-    )
+    return isSuccess ?
+        <div className='mt-4 flex items-center jusitfy-center gap-1 text-white text-sm'>Загружаем аккаунт...<Loader2
+            className="text-white h-4 w-4 animate-spin"/></div> : (
+            <form className='w-full' onSubmit={onSubmit}>
+                <div className='w-full mt-4'>
+                    <label className='text-sm text-[#ddd]'>Почта</label>
+                    <Input type='email' className='mt-1' placeholder='Введите почту' {...register('email')}/>
+                </div>
+                <div className='w-full mt-4'>
+                    <label className='text-sm text-[#ddd]'>Пароль</label>
+                    <Input type='password' className='mt-1' placeholder='Введите пароль' {...register('password')}/>
+                </div>
+                <Button className='w-full mt-8' isLoading={isPending} onClick={onSubmit}>
+                    Продолжить
+                </Button>
+                <input type='submit' className='hidden'/>
+            </form>
+        )
 }

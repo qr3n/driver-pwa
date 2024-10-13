@@ -11,6 +11,7 @@ import Link from "next/link";
 import { revalidateTagFrontend } from "@/shared/api";
 import { CheckCircleIcon } from "lucide-react";
 import { BiCheckCircle } from "react-icons/bi";
+import { GiCancel } from "react-icons/gi";
 
 interface IProps {
     order: IOrder,
@@ -56,10 +57,13 @@ export const TakeOrDiscountButton = (props: IProps) => {
                     order_id: props.order.id
                 })}
                 isLoading={isPending}
-                className='text-white p-4 z-20'>
+                className='text-white p-4 z-20 w-full sm:w-max'>
                 Начать выполнение
+            </Button> : props.order.status === 'canceled' ? <Button
+                className='bg-red-500 hover:bg-red-600 text-white w-full sm:w-max font-medium p-4 z-20'>
+                <GiCancel className='w-5 h-5'/>
             </Button> : <Button
-                className='text-white font-medium p-4 z-20'>
+                className='text-white w-full sm:w-max font-medium p-4 z-20'>
                 <BiCheckCircle className='w-6 h-6'/>
             </Button>
         )
@@ -69,7 +73,7 @@ export const TakeOrDiscountButton = (props: IProps) => {
         <>
             { takeOrDiscountLoading ?  <Button
                 isLoading
-                className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
+                className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20 w-full sm:w-max'
             />
             : (
                     takeOrDiscount === 'take' ? <TakeOrder order_id={props.order.id}/> : <Button

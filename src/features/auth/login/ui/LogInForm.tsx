@@ -56,7 +56,7 @@ export const LogInForm = () => {
         }
     }, [cookies, data, isSuccess, router]);
 
-    return isSuccess ? <div className='mt-4'><Loader2 className="text-white h-4 w-4 animate-spin" /></div> : (
+    return isSuccess ? <div className='mt-4 flex items-center jusitfy-center gap-1 text-white text-sm'>Загружаем аккаунт...<Loader2 className="text-white h-4 w-4 animate-spin" /></div> : (
         <form className='w-full' onSubmit={onSubmit}>
             <div className='w-full mt-4'>
                 <label className='text-sm text-[#ddd]'>Почта</label>

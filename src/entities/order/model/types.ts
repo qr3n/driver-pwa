@@ -12,7 +12,7 @@ export interface IOrder {
     addr_to: string,
     addr_from: string,
     comment: string,
-    status: 'active' | 'disabled',
+    status: 'active' | 'disabled' | 'canceled',
     cost: number,
     count: string,
     sender_phone: string,

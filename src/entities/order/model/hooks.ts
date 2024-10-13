@@ -44,9 +44,7 @@ export const useCurrentOrder = async () => {
 
     const order: IOrder | null = await data.json()
 
-    console.log('order')
-
-    return order
+    return order?.status !== 'disabled' ? order : null
 }
 
 

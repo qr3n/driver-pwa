@@ -1,9 +1,10 @@
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import { OpenOrderDetails } from "./OpenOrderDetails";
-import { calculateCost, calculateDistance, IOrder, useCurrentOrder } from "@/entities/order";
+import { calculateCost, IOrder, useCurrentOrder } from "@/entities/order";
 import Image from "next/image";
 import { TakeOrDiscountButton } from "./TakeOrDiscountButton";
 import { OrderTakeOrDiscount } from "@/entities/order/ui/OrderTakeOrDiscount";
+import { CancelOrder } from "@/features/order/cancel/ui/CancelOrder";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -23,6 +24,7 @@ export const Order = async (data: IOrder) => {
                 <OpenOrderDetails {...data}/>
                 <div className='sm:max-w-min z-20'>
                     <TakeOrDiscountButton order={data} currentOrder={currentOrder}/>
+                    {(data.status === 'active') && <CancelOrder id={data.id} email={data.driver_email}/>}
                 </div>
             </OrderTakeOrDiscount>
 

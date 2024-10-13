@@ -18,3 +18,10 @@ export interface ChangeStatusParams {
     order_id: number,
     status: string
 }
+
+export interface CancelOrderParams {
+    token: string,
+    order_id: number,
+    reason: string,
+    comment: string
+}
