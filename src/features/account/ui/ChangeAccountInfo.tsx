@@ -19,10 +19,10 @@ interface FormData {
     passport_number: string,
     passport_given: string,
     passport_given_date: string,
-    phone: string,
+    phone: string
 }
 
-export const AddAccountInfo = () => {
+export const ChangeAccountInfo = () => {
     const [open, setOpen] = useState<boolean>(false);
     const session = useClientSession()
     const { register, handleSubmit } = useForm<FormData>()
@@ -109,7 +109,7 @@ export const AddAccountInfo = () => {
                 </form>
             </DialogContent>
             <DialogTrigger asChild>
-                <Button className='mt-8'>Добавить информацию</Button>
+                <Button className='mt-8'>Изменить информацию</Button>
             </DialogTrigger>
         </Dialog>
     )

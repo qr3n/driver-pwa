@@ -13,4 +13,5 @@ export interface AddInfo {
     passport_number: string,
     passport_given: string,
     passport_given_date: string,
+    phone: string
 }
