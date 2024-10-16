@@ -9,6 +9,10 @@ class AccountService {
     addInfo(params: AddInfo): Promise<void> {
         return baseApi.post(`/driver-info?token=${params.token}`, params)
     }
+
+    changeInfo(params: AddInfo) {
+        return baseApi.put(`/driver-info?token=${params.token}`, params)
+    }
 }
 
 export const accountService = new AccountService();

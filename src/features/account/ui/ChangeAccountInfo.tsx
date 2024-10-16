@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { accountService } from "@/shared/api/services/account";
 import toast from "react-hot-toast";
 import { revalidateTagFrontend } from "@/shared/api";
+import { IAccountInfo } from "@/entities/account/model/types";
 
 interface FormData {
     name: string,
@@ -22,13 +23,23 @@ interface FormData {
     phone: string
 }
 
-export const ChangeAccountInfo = () => {
+export const ChangeAccountInfo = ({ accountInfo }: { accountInfo: IAccountInfo }) => {
     const [open, setOpen] = useState<boolean>(false);
     const session = useClientSession()
-    const { register, handleSubmit } = useForm<FormData>()
+    const { register, handleSubmit } = useForm<FormData>({
+        defaultValues: {
+            name: accountInfo.name,
+            surname: accountInfo.surname,
+            patronymic: accountInfo.patronymic,
+            passport_number: accountInfo.passport_number,
+            passport_given: accountInfo.passport_given,
+            passport_given_date: accountInfo.passport_given_date,
+            phone: accountInfo.phone || ''
+        }
+    })
     const { mutate, isPending, isSuccess, isError } = useMutation({
-        mutationFn: accountService.addInfo,
-        mutationKey: ["addInfo"],
+        mutationFn: accountService.changeInfo,
+        mutationKey: ["changeAccountInfo"],
     })
 
     const onSubmit = (data: FormData) => {
@@ -47,7 +58,7 @@ export const ChangeAccountInfo = () => {
         if (isSuccess) {
             revalidateTagFrontend('info')
             setOpen(false)
-            toast.success('Успешно добавлено')
+            toast.success('Информация изменена')
         }
     }, [isSuccess]);
 
