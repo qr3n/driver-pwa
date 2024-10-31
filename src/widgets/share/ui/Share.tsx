@@ -46,10 +46,10 @@ export const Share = () => {
                     </div>
                     <h1 className='font-medium mt-2'>Скопировать ссылку</h1>
                     <div className='flex relative gap-4 items-center text-[#aaa] mt-2 bg-[#222] border border-[#333] rounded-2xl p-3'>
-                        https://driver-pwa-black.vercel.app
+                        https://driver-pwa-emarket.vercel.app
                         <div
                             onClick={() => {
-                                navigator.clipboard.writeText(`https://driver-pwa-black.vercel.app`)
+                                navigator.clipboard.writeText(`https://driver-pwa-emarket.vercel.app`)
                                 toast.success('Скопировано')
                             }}
                             className='bg-[#444] p-2 rounded-lg absolute right-2 cursor-pointer active:scale-90 transition-all'>
