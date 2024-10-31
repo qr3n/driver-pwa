@@ -7,13 +7,20 @@ import { X } from "lucide-react"
 import { cn } from "@/shared/shadcn/lib/utils"
 import { DialogProps, DialogTriggerProps } from "@radix-ui/react-dialog";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const Dialog = (props: DialogProps) => {
+const VirtualDialog = (props: DialogProps) => {
     const params = useSearchParams()
 
     return (
         <DialogPrimitive.Root {...props} open={props.open && !!params.get('modal')}/>
     )
+}
+
+const Dialog = (props: DialogProps) => {
+    return <Suspense fallback={<></>}>
+        <VirtualDialog {...props}/>
+    </Suspense>
 }
 
 const DialogTrigger = (props: DialogTriggerProps) => {
