@@ -1,20 +1,9 @@
+
+
+import { calculateCost, IOrder, useCurrentOrders } from "@/entities/order";
 import Image from "next/image";
-import {
-    aliIcon,
-    bgDesktop,
-    bgMobile,
-    dolphinWithGlasses,
-    lamodaIcon,
-    ozonIcon, questionIcon, wildberriesIcon,
-    yandexIcon
-} from "@/shared/assets";
+import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import Link from "next/link";
-import { calculateDistance, useCurrentOrder } from "@/entities/order";
-import { Button } from "@/shared/shadcn/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/shared/shadcn/ui/dialog";
-import { FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
-import { PropsWithChildren } from "react";
-import { OrderNextStep } from "@/features/order/step/ui/OrderNextStep";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -24,137 +13,47 @@ const imagesMap = {
     'Wildberries': wildberriesIcon
 }
 
-interface IStepProps extends PropsWithChildren {
-    completed: boolean,
-    current?: boolean
-}
-
-const Step = (props: IStepProps) => {
+const Order = (data: IOrder) => {
     return (
-        <div className='flex gap-3 items-center'>
-            <div className='rounded-full '>
-                { props.completed ? <FaCheckCircle  className='text-blue-500 w-6 h-6'/> : <FaRegCheckCircle className='w-6 h-6' style={{color: props.current ? 'white' : '#aaa'}}/> }
+        <Link href={`/orders/active/${data.id}`}>
+            <div
+                className='relative cursor-pointer w-full bg-[#151515] flex flex-col-reverse gap-4 hover:bg-[#222] p-4 rounded-3xl'>
+                <div className='flex gap-4 items-center'>
+                    <Image
+                        src={data.cargo === 'anything' ? questionIcon : imagesMap[data.warehouse]}
+                        placeholder='blur'
+                        alt={'icon'}
+                        width={48}
+                        height={48}
+                        className='rounded-xl object-cover h-max'
+                    />
+                    <div>
+                        <h1 className='font-semibold'>
+                            {data.time_to_take}
+                        </h1>
+                        <p className='p-3 bg-[#333] border border-[#555] w-full max-w-[400px] rounded-xl text-[#ddd] font-medium text-sm mt-1 '>
+                            {data.addr_from.replace('г Москва,', '')}
+                            <span className='font-normal text-[#aaa]'> до</span> {data.addr_to.replace('г Москва,', '')}
+                        </p>
+                        <h1 className='text-center bg-blue-900  text-white font-medium text-xs px-4 py-1 mt-3 w-max rounded-full'>
+                            {calculateCost(data.cost, data.tariff)} руб.
+                        </h1>
+                    </div>
+                </div>
             </div>
-
-            <div className='font-medium' style={{ color: (props.completed || !props.current) ? '#aaa' : 'white' }}>
-                { props.children }
-            </div>
-        </div>
+        </Link>
     )
 }
-const statuses = ['Курьер назначен', 'В пути', 'На погрузке', 'Выполняет', 'Заказ выполнен']
 
-export default async function ActiveOrder() {
-    const currentOrder = await useCurrentOrder()
+export default async function ActiveOrders() {
+    const orders = await useCurrentOrders()
 
-    return currentOrder ? (
-        <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4 '>
-            <div className='flex flex-col w-full sm:max-w-lg'>
-                <div className='mt-5'>
-                    <h1 className='text-3xl text-center font-semibold flex items-center justify-center gap-4'>
-                        <Image
-                            src={currentOrder.cargo === 'anything' ? questionIcon : imagesMap[currentOrder.warehouse]}
-                            alt={'icon'}
-                            width={42}
-                            height={42}
-                            className='rounded-xl object-cover h-max'
-                        />
-                        Текущий заказ
-                    </h1>
-                    <h1 className='text-center text-[#999]'>~{calculateDistance(currentOrder.cost)} км</h1>
-                </div>
-                <div className='w-full h-full max-h-[calc(80dvh-220px)] pb-4 pt-5 overflow-y-auto px-6'>
-                    <h1 className='text-2xl text-white font-semibold'>Основное</h1>
-                    <h1 className='text-xl text-[#999]  mt-4'>Этап</h1>
-                    <h1 className='text-center bg-blue-500 mt-1.5 text-white font-medium text-xs px-4 py-1 w-max rounded-full'>{currentOrder.courier_status}</h1>
-                    <h1 className='text-xl text-[#999]  mt-4'>Номер отправителя</h1>
-                    <a href={`tel:+7${currentOrder.sender_phone.replace('+7', '')}`} className='text-blue-400 mt-1 font-medium'>+7{currentOrder.sender_phone.replace('+7', '')}</a>
-                    <h1 className='text-xl text-[#999]  mt-4'>Номер получателя</h1>
-                    <a href={`tel:+7${currentOrder.recipient_phone.replace('+7', '')}`} className='text-blue-400 mt-1 font-medium'>+7{currentOrder.recipient_phone.replace('+7', '')}</a>
-
-                    <h1 className='text-xl text-[#999]  mt-4'>Откуда забрать</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.addr_from}</p>
-                    <h1 className='text-xl text-[#999]  mt-4'>Куда доставить</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.addr_to}</p>
-
-                    <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
-
-                    <h1 className='text-2xl text-white font-semibold mt-6'>Дата и время</h1>
-                    <h1 className='text-xl text-[#999] mt-4'>Когда забрать</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.time_to_take}</p>
-                    <h1 className='text-xl text-[#999] mt-4'>Когда доставить</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.time_to_deliver}</p>
-
-                    <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
-
-                    <h1 className='text-2xl text-white font-semibold mt-6'>Габариты</h1>
-                    <h1 className='text-xl text-[#999] mt-4'>Длина</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[0]}</p>
-                    <h1 className='text-xl text-[#999] mt-4'>Ширина</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[1]}</p>
-                    <h1 className='text-xl text-[#999] mt-4'>Высота</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[2]}</p>
-                    <h1 className='text-xl text-[#999] mt-4'>Количество</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.count === '0' ? '1' : currentOrder.count}</p>
-
-                    <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
-
-                    <h1 className='text-2xl text-white font-semibold mt-6'>Дополнительно</h1>
-                    <h1 className='text-xl text-[#999] mt-4'>Комментарий</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.comment || 'Отсутствует'}</p>
-                </div>
-                <Dialog>
-                    <DialogContent
-                        className='bg-[#111] h-[100dvh] sm:max-h-max sm:h-max flex flex-col justify-between items-center'>
-                        <div className='mt-8'>
-                            <h1 className='text-3xl text-center font-semibold '>
-                            Начать следующий этап?
-                            </h1>
-                            <div className='mt-8 flex flex-col gap-6'>
-                                {statuses.map((status, index) => {
-                                    const isCurrent = status === currentOrder.courier_status;
-                                    const isNextToCurrent = index === statuses.indexOf(currentOrder.courier_status);
-
-                                    return (
-                                        <Step
-                                            key={index}
-                                            completed={isCurrent || (isNextToCurrent && !isCurrent)}
-                                            current={isNextToCurrent}
-                                        >
-                                            {status}
-                                        </Step>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <OrderNextStep order_id={currentOrder.id} currentStatus={currentOrder.courier_status}/>
-                    </DialogContent>
-                    <DialogTrigger asChild>
-                        <Button className='w-full mt-6 place-self-end justify-self-end'>
-                            Следующий этап
-                        </Button>
-                    </DialogTrigger>
-                </Dialog>
-            </div>
-        </div>
-    ) : (
-        <div className='w-full h-full flex relative items-center flex-col text-center justify-center'>
-            <Image placeholder="blur" src={bgMobile}
-                   className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
-            <Image placeholder="blur" src={bgDesktop}
-                   className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
+    return (
+        <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
+            <h1 className='text-3xl sm:text-4xl font-semibold'>Заказы в работе</h1>
             <div
-                className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
-
-            <div className='flex items-center justify-center flex-col'>
-                <Image priority src={dolphinWithGlasses} width={350} height={350} alt='test'
-                       className='w-40 sm:w-44 md:w-44 lg:w-48 xl:w-56'/>
-                <h1 className='text-2xl md:text-3xl font-semibold mt-8'>
-                    Активного заказа пока нет
-                </h1>
-                <h2 className='text-sm sm:text-base text-[#999] mt-1'>
-                    Скорее выберите его <Link href={'/orders'}><span className='text-blue-500 cursor-pointer'>тут!</span></Link>
-                </h2>
+                className='max-w-3xl w-full flex flex-col gap-4 overflow-y-auto h-[calc(100dvh-250px)] sm:h-[calc(100dvh-190px)] mt-8'>
+                {orders.map(order => <Order key={order.id} {...order}/>)}
             </div>
         </div>
     )

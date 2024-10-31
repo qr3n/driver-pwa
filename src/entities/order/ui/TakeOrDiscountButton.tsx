@@ -15,12 +15,14 @@ import { GiCancel } from "react-icons/gi";
 
 interface IProps {
     order: IOrder,
-    currentOrder: IOrder | null,
+    currentOrder?: IOrder | null,
+    currentOrders: IOrder[],
 }
 
 export const TakeOrDiscountButton = (props: IProps) => {
     const session = useClientSession()
-    const { takeOrDiscountLoading, takeOrDiscount } = useContext(OrderTakeOrDiscountContext)
+    const { takeOrDiscountLoading } = useContext(OrderTakeOrDiscountContext)
+
     const { mutate, isPending, isSuccess } = useMutation({
         mutationFn: orderService.makeCurrent,
         mutationKey: ['make_current']
@@ -33,23 +35,8 @@ export const TakeOrDiscountButton = (props: IProps) => {
     }, [isSuccess]);
 
     if (props.order.driver_email === session?.email) {
-        return props.currentOrder ?  (
-            props.currentOrder.id === props.order.id ? (
-                <Link href={'/orders/active'} className='z-50 w-full'>
-                    <Button
-                        className='text-white font-medium p-4 z-20 w-full'>
-                        Ваш текущий заказ
-                    </Button>
-                </Link>
-            ) : (
-                props.order.status === 'active' ? <Button
-                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20 w-full sm:w-max'>
-                    Это ваш заказ
-                </Button> : <Button
-                    className='text-white bg-[#333] hover:bg-[#444] font-medium p-4 z-20 w-full sm:w-max'>
-                    <CheckCircleIcon/>
-                </Button>
-            )
+        return props.order.current ? (
+            <Link href={`/orders/active/${props.order.id}`}><Button className='text-white p-4 z-20 w-full sm:w-max'>Заказ в работе</Button></Link>
         ) : (
             props.order.status === 'active' ? <Button
                 onClick={() => mutate({
@@ -58,7 +45,6 @@ export const TakeOrDiscountButton = (props: IProps) => {
                 })}
                 isLoading={isPending}
                 className='text-white p-4 z-20 w-full sm:w-max'>
-                Начать выполнение
             </Button> : props.order.status === 'canceled' ? <Button
                 className='bg-red-500 hover:bg-red-600 text-white w-full sm:w-max font-medium p-4 z-20'>
                 <GiCancel className='w-5 h-5'/>
@@ -75,13 +61,8 @@ export const TakeOrDiscountButton = (props: IProps) => {
                 isLoading
                 className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20 w-full sm:w-max'
             />
-            : (
-                    takeOrDiscount === 'take' ? <TakeOrder order_id={props.order.id}/> : <Button
-                    className='text-white bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-20'
-                >
-                    Скидка
-                </Button>
-            ) }
+            : <TakeOrder order_id={props.order.id}/>
+            }
         </>
     )
 }

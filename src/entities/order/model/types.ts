@@ -22,5 +22,5 @@ export interface IOrder {
     auction: boolean,
     timestamp: Date,
     driver_email: string,
-    current: boolean
+    current: boolean,
 }

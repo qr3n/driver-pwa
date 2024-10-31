@@ -20,10 +20,11 @@ const imagesMap = {
 }
 
 interface IProps extends PropsWithChildren {
-    currentOrder: IOrder | null
+    currentOrder?: IOrder | null,
+    currentOrders: IOrder[]
 }
 
-export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
+export const OrderDetailsModal = ({ children, currentOrders }: IProps) => {
     const session = useClientSession()
     const [state, setState] = useState<'take' | 'discount'>()
     const [orderDetails, setOrderDetails] = useState<IOrder>();
@@ -132,7 +133,7 @@ export const OrderDetailsModal = ({ children, currentOrder }: IProps) => {
                                 className='text-center text-sm text-[#999]'>До конца аукциона осталось <span
                                 className='text-white'>{timeLeft} мин.</span></p></> : <DialogClose>
                                 <OrderTakeOrDiscount createdAt={orderDetails.timestamp}>
-                                <TakeOrDiscountButton order={orderDetails} currentOrder={currentOrder}/>
+                                <TakeOrDiscountButton currentOrders={currentOrders} order={orderDetails}/>
                                 </OrderTakeOrDiscount>
                             </DialogClose>) }
                         </>

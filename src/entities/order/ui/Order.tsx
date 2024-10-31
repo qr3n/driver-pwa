@@ -1,6 +1,6 @@
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import { OpenOrderDetails } from "./OpenOrderDetails";
-import { calculateCost, IOrder, useCurrentOrder } from "@/entities/order";
+import { calculateCost, IOrder, useCurrentOrder, useCurrentOrders } from "@/entities/order";
 import Image from "next/image";
 import { TakeOrDiscountButton } from "./TakeOrDiscountButton";
 import { OrderTakeOrDiscount } from "@/entities/order/ui/OrderTakeOrDiscount";
@@ -15,7 +15,7 @@ const imagesMap = {
 }
 
 export const Order = async (data: IOrder) => {
-    const currentOrder = await useCurrentOrder()
+    const currentOrders = await useCurrentOrders()
 
     return (
         <div
@@ -23,7 +23,7 @@ export const Order = async (data: IOrder) => {
             <OrderTakeOrDiscount createdAt={data.timestamp}>
                 <OpenOrderDetails {...data}/>
                 <div className='sm:max-w-min z-20'>
-                    <TakeOrDiscountButton order={data} currentOrder={currentOrder}/>
+                    <TakeOrDiscountButton currentOrders={currentOrders} order={data}/>
                     {(data.status === 'active') && <CancelOrder id={data.id} email={data.driver_email}/>}
                 </div>
             </OrderTakeOrDiscount>

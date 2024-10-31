@@ -34,18 +34,45 @@ interface INotParsedOrder {
     current: boolean
 }
 
-export const useCurrentOrder = async () => {
+export const useCurrentOrders = async () => {
     const session = useServerSession()
 
     const data = await fetch(
-        `https://postavan.com/api/order/current?token=${session?.token}`,
+        `https://postavan.com/api/orders/current?token=${session?.token}`,
+        { cache: 'no-cache', next: { tags: ['currents_orders'] } }
+    )
+
+    const orders: IOrder[] = await data.json()
+
+    return orders.filter(order => order.status !== 'disabled' && order.status !== 'canceled')
+}
+
+// export const useCurrentOrder = async () => {
+//     const session = useServerSession()
+//
+//     const data = await fetch(
+//         `https://postavan.com/api/order/current?token=${session?.token}`,
+//         { cache: 'no-cache', next: { tags: ['current_orders'] } }
+//     )
+//
+//     const order: IOrder | null = await data.json()
+//
+//     return order?.status !== 'disabled' ? order : null
+// }
+
+export const useCurrentOrder = async (id: string) => {
+    const session = useServerSession()
+
+    const data = await fetch(
+        `https://postavan.com/api/order/current/${id}?token=${session?.token}`,
         { cache: 'no-cache', next: { tags: ['current_orders'] } }
     )
 
     const order: IOrder | null = await data.json()
 
-    return order?.status !== 'disabled' ? order : null
+    return order
 }
+
 
 
 export const useOrders = async () => {

@@ -7,6 +7,7 @@ export const OrdersList = ({ children }: PropsWithChildren) => {
             w-full
             mt-8
             flex
+            items-center
             flex-col
             gap-4
             overflow-y-auto

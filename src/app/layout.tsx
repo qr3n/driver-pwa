@@ -7,6 +7,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { CookiesProvider } from "next-client-cookies/server";
 import { SliderMenu } from "@/widgets/slider-menu/ui/SliderMenu";
+import { Share } from "@/widgets/share";
 export { metadata }
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <link rel={"icon"} href={"icons/icon-128x128.png"}/>
       </head>
       <body>
+      <Share/>
       <Providers>
           <Toaster toastOptions={{
                   style: {
