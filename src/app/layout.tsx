@@ -14,9 +14,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
       <html lang="en">
       <head>
-          <title>One Driver</title>
-          <meta name="description" content={'One Driver'}/>
-          <meta name="generator" content={'Postavan'}/>
+          <title>PostaDriver</title>
+          <meta name="description" content={'PostaDriver'}/>
+          <meta name="generator" content={'PostaDriver'}/>
           <link rel="manifest" href={"/manifest.json"}/>
           <meta name="keywords" content={["nextjs", "nextjs14", "next14", "pwa", "next-pwa"].join(", ")}/>
           <meta name="theme-color" media={"(prefers-color-scheme: dark)"} content={"#000000"}/>
