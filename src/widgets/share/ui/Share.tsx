@@ -26,12 +26,12 @@ export const Share = () => {
                 <div className='flex p-4 flex-col gap-3'>
                     <h1 className='font-medium'>Поделиться с помощью</h1>
                     <div className='flex gap-4 mt-2 bg-[#222] border border-[#333] rounded-2xl px-3 py-2'>
-                        <TelegramShareButton url={'askdjajdk'}>
+                        <TelegramShareButton url={'https://driver-pwa-emarket.vercel.app'}>
                             <div className='p-3 bg-[#222] border border-[#555] rounded-full'>
                                 <Image src={telegram} alt={'telegram'} width={32} height={32}/>
                             </div>
                         </TelegramShareButton>
-                        <WhatsappShareButton url={'asdasd'} title='Test' separator={'Test'}>
+                        <WhatsappShareButton url={'https://driver-pwa-emarket.vercel.app'} title='Test' separator={'Test'}>
                             <div className='p-3 bg-[#222] border border-[#555] rounded-full'>
                                 <Image src={whatsapp} alt={'whatsapp'} width={32} height={32}/>
                             </div>
