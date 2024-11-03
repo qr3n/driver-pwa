@@ -10,13 +10,6 @@ import { Button } from "@/shared/shadcn/ui/button";
 import { HiShare } from "react-icons/hi2";
 import toast from "react-hot-toast";
 
-const SocialMedia = () => {
-    return (
-        <>
-        </>
-    )
-}
-
 export const Share = () => {
     return (
         <Dialog>
