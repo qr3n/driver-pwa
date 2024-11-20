@@ -7,10 +7,12 @@ import { useEffect } from "react";
 import { revalidateTagFrontend } from "@/shared/api";
 import toast from "react-hot-toast";
 import { DialogClose } from "@/shared/shadcn/ui/dialog";
+import { useRouter } from "next/navigation";
 
 const statuses = ['Курьер назначен', 'В пути', 'На погрузке', 'Выполняет', 'Заказ выполнен']
 
 export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: string, order_id: number }) => {
+    const router = useRouter()
     const { mutate, isSuccess, isPending, isError } = useMutation({
         mutationFn: orderService.changeStatus,
         mutationKey: ['change_status']
@@ -20,8 +22,9 @@ export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: stri
         if (isSuccess) {
             revalidateTagFrontend('current_orders')
             toast.success('Вы перешли на следующий этап')
+            router.push('/orders/active')
         }
-    }, [isSuccess]);
+    }, [isSuccess, router]);
 
 
     useEffect(() => {
