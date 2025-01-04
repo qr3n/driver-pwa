@@ -49,6 +49,16 @@ export const SliderMenu = () => {
                     </SheetClose>
                 </Link>
 
+                <Link href={'/settings'}>
+                    <SheetClose asChild>
+                        <div
+                            className='w-full p-3 mt-4 h-max flex gap-2 rounded-xl bg-[#222] hover:bg-[#333] cursor-pointer items-center'>
+                            Настройки
+                        </div>
+                    </SheetClose>
+                </Link>
+
+
                 <Logout/>
             </SheetContent>
         </Sheet>
