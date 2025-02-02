@@ -1,6 +1,5 @@
 export interface TakeOrderParams {
-    token: string,
-    order_id: number
+    order_id: string
 }
 
 export interface DiscountOrderParams {
@@ -10,18 +9,24 @@ export interface DiscountOrderParams {
 }
 
 export interface MakeOrderCurrentParams {
-    token: string,
     order_id: number
 }
 
+export interface StartProgressParams {
+    order_id: string
+}
+
 export interface ChangeStatusParams {
-    order_id: number,
+    order_id: string,
     status: string
 }
 
+export interface NextStepParams {
+    order_id: string,
+}
+
 export interface CancelOrderParams {
-    token: string,
-    order_id: number,
+    order_id: string,
     reason: string,
     comment: string
 }

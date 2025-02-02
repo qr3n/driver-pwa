@@ -10,11 +10,11 @@ import Link from "next/link"
 import { FaUser } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useServerSession } from "@/entities/session/server";
+import { getServerSession } from "@/entities/session/server";
 import { Logout } from "@/features/auth/logout/ui/Logout";
 
 export const SliderMenu = () => {
-    const session = useServerSession()
+    const session = getServerSession()
 
     return session ? (
         <Sheet>
@@ -44,7 +44,7 @@ export const SliderMenu = () => {
                     <SheetClose asChild>
                         <div
                             className='w-full p-3 mt-4 h-max flex gap-2 rounded-xl bg-[#222] hover:bg-[#333] cursor-pointer items-center'>
-                            Машина
+                            Автомобиль
                         </div>
                     </SheetClose>
                 </Link>

@@ -1,17 +1,26 @@
 import { baseApi } from "@/shared/api";
 import { AddCarInfoParams, AddInfo } from "@/shared/api/services/account/types";
+import { ICar } from "@/entities/car/model/types";
 
 class AccountService {
-    addCarInfo(params: AddCarInfoParams): Promise<void> {
-        return baseApi.post(`/car?token=${params.token}`, params)
+    async addCarInfo(params: AddCarInfoParams) {
+        return await baseApi.put<ICar>(`/profile/car`, params)
     }
 
-    addInfo(params: AddInfo): Promise<void> {
-        return baseApi.post(`/driver-info?token=${params.token}`, params)
+    async getCarInfo() {
+        return await baseApi.get<ICar>('/profile/car')
     }
 
-    changeInfo(params: AddInfo) {
-        return baseApi.put(`/driver-info?token=${params.token}`, params)
+    async addInfo(params: AddInfo): Promise<void> {
+        return await baseApi.post(`/profile`, params)
+    }
+
+    async changeInfo(params: AddInfo) {
+        return await baseApi.put(`/profile`, params)
+    }
+
+    async getInfo() {
+        return await baseApi.get('/profile')
     }
 }
 

@@ -1,10 +1,10 @@
 import { PropsWithChildren, Suspense } from "react";
 import Loading from "@/app/orders/loading";
-import { useServerSession } from "@/entities/session/server";
+import { getServerSession } from "@/entities/session/server";
 import { redirect } from "next/navigation";
 
 export default function OrdersLayout({ children }: PropsWithChildren) {
-    const session = useServerSession()
+    const session = getServerSession()
 
     if (!session) redirect('/auth/login')
 

@@ -5,6 +5,6 @@ const withPWA = withPWAInit({
     disable: true
 });
 
-export default withPWA({
+export default {
     reactStrictMode: false,
-});
+}

@@ -1,13 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/shadcn/ui/tabs";
-import { OrderDetailsModal, useCurrentOrder, useCurrentOrders } from "@/entities/order";
-import { useOrders } from "@/entities/order";
+import { OrderDetailsModal, getCurrentOrder, getCurrentOrders } from "@/entities/order";
+import { getOrders } from "@/entities/order";
 import { OrdersList } from "./OrdersList";
 import { OrdersRender } from "./OrdersRender";
 import { UpdateOrdersWebsocket } from "@/app/orders/UpdateOrdersWebsocket";
 
 export default async function DashboardPage() {
-    const { todayOrders, plannedOrders, myOrders } = await useOrders()
-    const currentOrders = await useCurrentOrders()
+    const { todayOrders, plannedOrders, myOrders } = await getOrders()
+    const currentOrders = await getCurrentOrders()
+
+    console.log(todayOrders)
+    console.log(plannedOrders)
 
     return (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
@@ -17,7 +20,7 @@ export default async function DashboardPage() {
                 <TabsList>
                     <TabsTrigger value='today' className='text-xs sm:text-sm'>На сегодня</TabsTrigger>
                     <TabsTrigger value='planned' className='text-xs sm:text-sm'>Запланированные</TabsTrigger>
-                    <TabsTrigger value='taked' className='text-xs sm:text-sm'>В работе</TabsTrigger>
+                    <TabsTrigger value='taked' className='text-xs sm:text-sm'>Забронированные</TabsTrigger>
                 </TabsList>
 
                 <OrderDetailsModal currentOrders={currentOrders}>

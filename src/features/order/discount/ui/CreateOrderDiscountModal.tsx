@@ -58,7 +58,7 @@ export const CreateOrderDiscountModal = ({ order_id }: { order_id: number }) => 
             toast.success(`Вы предложили скидку ${current}%`)
             setOrderDetailsModalOpen(false)
         }
-    }, [isSuccess])
+    }, [current, isSuccess, setOrderDetailsModalOpen])
 
     return (
         <DialogContent className='bg-[#111] h-[100dvh] sm:h-[70dvh] sm:max-h-[80dvh] flex flex-col'>

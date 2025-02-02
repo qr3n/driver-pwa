@@ -14,7 +14,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
       <html lang="en">
       <head>
-          <title>PostaDriver</title>
+          <title>PBOX - Driver</title>
           <meta name="description" content={'PostaDriver'}/>
           <meta name="generator" content={'PostaDriver'}/>
           <link rel="manifest" href={"/manifest.json"}/>
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <meta name="theme-color" media={"(prefers-color-scheme: dark)"} content={"#000000"}/>
           <meta
               name="author"
-              content={"Alldo Faiz Ramadhani"} {...("Alldo Faiz Ramadhani" && {href: 'https://github.com/qr3n'})}
+              content={"https://github.com/qr3n"}
           />
           <meta
               name="viewport"

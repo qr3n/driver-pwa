@@ -5,13 +5,13 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN npm install --force
 
 # Build app
-RUN yarn build
+RUN npm run build
 
 # Expose the listening port
 EXPOSE 3000
 
 # Run yarb start script when container starts
-CMD yarn start
+CMD npm run start

@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { accountService } from "@/shared/api/services/account";
 import toast from "react-hot-toast";
-import { revalidateTagFrontend } from "@/shared/api";
+import { queryClient, revalidateTagFrontend } from "@/shared/api";
 import { IAccountInfo } from "@/entities/account/model/types";
 
 interface FormData {
@@ -39,7 +39,7 @@ export const ChangeAccountInfo = ({ accountInfo }: { accountInfo: IAccountInfo }
     })
     const { mutate, isPending, isSuccess, isError } = useMutation({
         mutationFn: accountService.changeInfo,
-        mutationKey: ["changeAccountInfo"],
+        mutationKey: ["changeInfo"],
     })
 
     const onSubmit = (data: FormData) => {
@@ -56,7 +56,7 @@ export const ChangeAccountInfo = ({ accountInfo }: { accountInfo: IAccountInfo }
 
     useEffect(() => {
         if (isSuccess) {
-            revalidateTagFrontend('info')
+            queryClient.invalidateQueries({ queryKey: ['getInfo'] })
             setOpen(false)
             toast.success('Информация изменена')
         }

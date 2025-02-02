@@ -24,7 +24,7 @@ import {
     yandexIcon
 } from "@/shared/assets";
 import Link from "next/link";
-import { calculateDistance, useCurrentOrder } from "@/entities/order";
+import { calculateDistance, getCurrentOrder } from "@/entities/order";
 import { Button } from "@/shared/shadcn/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/shared/shadcn/ui/dialog";
 import { FaCheckCircle, FaRegCheckCircle } from "react-icons/fa";
@@ -61,7 +61,7 @@ const statuses = ['Курьер назначен', 'В пути', 'На погр
 
 export default async function ActiveOrder({params}: { params: Promise<{ id: string }> }) {
     const id = (await params).id
-    const currentOrder = await useCurrentOrder(id)
+    const currentOrder = await getCurrentOrder(id)
 
     return currentOrder ? (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4 '>
@@ -69,7 +69,7 @@ export default async function ActiveOrder({params}: { params: Promise<{ id: stri
                 <div className='mt-5'>
                     <h1 className='text-3xl text-center font-semibold flex items-center justify-center gap-4'>
                         <Image
-                            src={currentOrder.cargo === 'anything' ? questionIcon : imagesMap[currentOrder.warehouse]}
+                            src={currentOrder.shipment_type === 'anything' ? questionIcon : imagesMap[currentOrder.marketplace]}
                             alt={'icon'}
                             width={42}
                             height={42}
@@ -82,36 +82,36 @@ export default async function ActiveOrder({params}: { params: Promise<{ id: stri
                 <div className='w-full h-full max-h-[calc(80dvh-220px)] pb-4 pt-5 overflow-y-auto px-6'>
                     <h1 className='text-2xl text-white font-semibold'>Основное</h1>
                     <h1 className='text-xl text-[#999]  mt-4'>Этап</h1>
-                    <h1 className='text-center bg-blue-500 mt-1.5 text-white font-medium text-xs px-4 py-1 w-max rounded-full'>{currentOrder.courier_status}</h1>
+                    <h1 className='text-center bg-blue-500 mt-1.5 text-white font-medium text-xs px-4 py-1 w-max rounded-full'>{currentOrder.status}</h1>
                     <h1 className='text-xl text-[#999]  mt-4'>Номер отправителя</h1>
                     <a href={`tel:+7${currentOrder.sender_phone.replace('+7', '')}`} className='text-blue-400 mt-1 font-medium'>+7{currentOrder.sender_phone.replace('+7', '')}</a>
                     <h1 className='text-xl text-[#999]  mt-4'>Номер получателя</h1>
                     <a href={`tel:+7${currentOrder.recipient_phone.replace('+7', '')}`} className='text-blue-400 mt-1 font-medium'>+7{currentOrder.recipient_phone.replace('+7', '')}</a>
 
                     <h1 className='text-xl text-[#999]  mt-4'>Откуда забрать</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.addr_from}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.pickup_addresses.join(', ')}</p>
                     <h1 className='text-xl text-[#999]  mt-4'>Куда доставить</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.addr_to}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.delivery_addresses.join(', ')}</p>
 
                     <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
 
                     <h1 className='text-2xl text-white font-semibold mt-6'>Дата и время</h1>
                     <h1 className='text-xl text-[#999] mt-4'>Когда забрать</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.time_to_take}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.pickup_date}</p>
                     <h1 className='text-xl text-[#999] mt-4'>Когда доставить</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.time_to_deliver}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.delivery_date}</p>
 
                     <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
 
                     <h1 className='text-2xl text-white font-semibold mt-6'>Габариты</h1>
                     <h1 className='text-xl text-[#999] mt-4'>Длина</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[0]}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.package_length}</p>
                     <h1 className='text-xl text-[#999] mt-4'>Ширина</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[1]}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.package_width}</p>
                     <h1 className='text-xl text-[#999] mt-4'>Высота</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.dimensions.split(' ')[2]}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.package_height}</p>
                     <h1 className='text-xl text-[#999] mt-4'>Количество</h1>
-                    <p className='mt-1 font-medium'>{currentOrder.count === '0' ? '1' : currentOrder.count}</p>
+                    <p className='mt-1 font-medium'>{currentOrder.places_count}</p>
 
                     <div className='w-full h-[1px] bg-[#444] rounded-full mt-6'/>
 
@@ -128,8 +128,8 @@ export default async function ActiveOrder({params}: { params: Promise<{ id: stri
                             </h1>
                             <div className='mt-8 flex flex-col gap-6'>
                                 {statuses.map((status, index) => {
-                                    const isCurrent = status === currentOrder.courier_status;
-                                    const isNextToCurrent = index === statuses.indexOf(currentOrder.courier_status);
+                                    const isCurrent = status === currentOrder.status;
+                                    const isNextToCurrent = index === statuses.indexOf(currentOrder.status);
 
                                     return (
                                         <Step
@@ -143,7 +143,7 @@ export default async function ActiveOrder({params}: { params: Promise<{ id: stri
                                 })}
                             </div>
                         </div>
-                        <OrderNextStep order_id={currentOrder.id} currentStatus={currentOrder.courier_status}/>
+                        <OrderNextStep order_id={currentOrder.id} currentStatus={currentOrder.status}/>
                     </DialogContent>
                     <DialogTrigger asChild>
                         <Button className='w-full mt-6 place-self-end justify-self-end'>

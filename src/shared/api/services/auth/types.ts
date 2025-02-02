@@ -9,9 +9,9 @@ export interface SignUpParams {
 }
 
 export interface LogInResponse {
-    token: string
+    access_token: string
 }
 
 export interface SignUpResponse {
-    token: string
+    access_token: string
 }

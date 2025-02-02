@@ -4,15 +4,13 @@ import { Button } from "@/shared/shadcn/ui/button";
 import { GiCancel } from "react-icons/gi";
 import { Dialog, DialogContent, DialogTrigger } from "@/shared/shadcn/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/shadcn/ui/select";
-import { useClientSession } from "@/entities/session/client";
 import { useMutation } from "@tanstack/react-query";
 import { orderService } from "@/shared/api/services/order";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { revalidateTagFrontend } from "@/shared/api";
 
-export const CancelOrder = ({ id, email }: { id: number, email: string }) => {
-    const session = useClientSession()
+export const CancelOrder = ({ id, email }: { id: string, email: string }) => {
     const [reason, setReason] = useState('')
     const [comment, setComment] = useState('')
     const [open, setOpen] = useState(false)
@@ -36,7 +34,7 @@ export const CancelOrder = ({ id, email }: { id: number, email: string }) => {
         }
     }, [isError])
 
-    return session && (session.email === email) ? (
+    return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild className='w-full'>
                 <Button className='bg-[#333] w-full hover:bg-[#404040] mt-4'>
@@ -62,7 +60,6 @@ export const CancelOrder = ({ id, email }: { id: number, email: string }) => {
                 </div>
                 <Button disabled={!reason} isLoading={isPending} className='bg-red-500 w-full hover:bg-[#404040] mt-4' onClick={() => {
                     mutate({
-                        token: session.token,
                         order_id: id,
                         reason: reason,
                         comment: comment
@@ -73,5 +70,5 @@ export const CancelOrder = ({ id, email }: { id: number, email: string }) => {
                 </Button>
             </DialogContent>
         </Dialog>
-    ) : <></>
+    )
 }

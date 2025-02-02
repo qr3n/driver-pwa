@@ -6,15 +6,12 @@ import { orderService } from "@/shared/api/services/order";
 import { useEffect } from "react";
 import { revalidateTagFrontend } from "@/shared/api";
 import toast from "react-hot-toast";
-import { DialogClose } from "@/shared/shadcn/ui/dialog";
 import { useRouter } from "next/navigation";
 
-const statuses = ['Курьер назначен', 'В пути', 'На погрузке', 'Выполняет', 'Заказ выполнен']
-
-export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: string, order_id: number }) => {
+export const OrderNextStep = ({ order_id }: { currentStatus: string, order_id: string }) => {
     const router = useRouter()
     const { mutate, isSuccess, isPending, isError } = useMutation({
-        mutationFn: orderService.changeStatus,
+        mutationFn: orderService.nextStep,
         mutationKey: ['change_status']
     })
 
@@ -36,7 +33,6 @@ export const OrderNextStep = ({ currentStatus, order_id }: { currentStatus: stri
     return (
         <Button isLoading={isPending} className='w-full mt-12 place-self-end justify-self-end' onClick={() => mutate({
             order_id: order_id,
-            status: statuses[statuses.indexOf(currentStatus) + 1]
         })}>
             Подтвердить
         </Button>

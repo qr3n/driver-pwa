@@ -1,3 +1,4 @@
 export interface ISession {
-    email: string
+    email: string,
+    id: string,
 }

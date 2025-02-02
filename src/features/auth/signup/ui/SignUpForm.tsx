@@ -52,7 +52,8 @@ export const SignUpForm = () => {
             toast.success('Добро пожаловать!', {
                 duration: 700
             })
-            cookies.set('access_token', data.data.token)
+            cookies.set('access_token', data.data.access_token)
+            localStorage.setItem('accessToken', data.data.access_token)
             router.push('/orders')
         }
     }, [cookies, data, isSuccess, router]);

@@ -8,23 +8,23 @@ import { useClientSession } from "@/entities/session/client";
 import { useEffect } from "react";
 import { revalidateTagFrontend } from "@/shared/api";
 
-export const TakeOrder = ({ order_id }: { order_id: string }) => {
+export const StartOrderProgress = ({ order_id }: { order_id: string }) => {
     const session = useClientSession()
     const { mutate, isSuccess, isPending, isError } = useMutation({
-        mutationFn: orderService.take,
-        mutationKey: ['take_order']
+        mutationFn: orderService.startProgress,
+        mutationKey: ['start_order']
     })
 
     useEffect(() => {
         if(isSuccess) {
-            toast.success("Заказ забронирован")
+            toast.success("Заказ в работе")
             revalidateTagFrontend('orders')
         }
     }, [isSuccess]);
 
     useEffect(() => {
         if(isError) {
-            toast.error('Кто-то уже взял этот заказ')
+            toast.error('Что то пошло не так')
             revalidateTagFrontend('orders')
         }
     }, [isError]);
@@ -39,7 +39,7 @@ export const TakeOrder = ({ order_id }: { order_id: string }) => {
             })}
             className='text-white w-full bg-blue-500 hover:bg-blue-400 font-semibold p-4 z-50'
         >
-            Забронировать
+            Начать выполнение
         </Button>
     )
 }

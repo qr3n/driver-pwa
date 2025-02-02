@@ -10,7 +10,8 @@ import { useForm } from "react-hook-form";
 import { useClientSession } from "@/entities/session/client";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { revalidateTagFrontend } from "@/shared/api";
+import { queryClient, revalidateTagFrontend } from "@/shared/api";
+import { ICar } from "@/entities/car/model/types";
 
 interface FormData {
     color: string,
@@ -22,7 +23,7 @@ export const AddCarInfo = () => {
     const [opem, setOpen] = useState<boolean>(false);
     const session = useClientSession()
     const { register, handleSubmit } = useForm<FormData>()
-    const { mutate, isPending, isSuccess, isError } = useMutation({
+    const { mutate, isPending, isSuccess, isError, data } = useMutation({
         mutationFn: accountService.addCarInfo,
         mutationKey: ["addCarInfo"],
     })
@@ -43,7 +44,7 @@ export const AddCarInfo = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            revalidateTagFrontend('car')
+            queryClient.setQueryData(['carInfo'], (old: ICar) => ({...old, ...data}))
             setOpen(false)
             toast.success('Успешно добавлено')
         }

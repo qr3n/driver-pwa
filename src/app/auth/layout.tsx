@@ -3,11 +3,11 @@ import { bgDesktop } from '@/shared/assets';
 import { PropsWithChildren, Suspense } from "react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { useServerSession } from "@/entities/session/server";
+import { getServerSession } from "@/entities/session/server";
 import Loading from "@/app/auth/loading";
 
 export default function AuthLayout({ children }: PropsWithChildren) {
-    const session = useServerSession()
+    const session = getServerSession()
 
     if (session) redirect('/orders')
 

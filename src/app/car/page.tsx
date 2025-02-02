@@ -1,12 +1,19 @@
+'use client';
+
 import Image from "next/image";
 import { bgDesktop, bgMobile, car } from "@/shared/assets";
 import { AddCarInfo } from "@/features/car/ui/AddCarInfo";
-import { useCar } from "@/entities/car/model/hooks";
+import { getCar } from "@/entities/car/model/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { accountService } from "@/shared/api/services/account";
 
-export default async function CarPage() {
-    const carData = await useCar()
+export default function CarPage() {
+    const { data } = useQuery({
+        queryFn: accountService.getCarInfo,
+        queryKey: ['carInfo']
+    })
 
-    return carData ? (
+    return data?.data ? (
         <div className='w-full h-full flex relative items-center flex-col text-center justify-center'>
             <Image placeholder="blur" src={bgMobile}
                    className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
@@ -18,13 +25,13 @@ export default async function CarPage() {
             <div className='flex items-center justify-center flex-col w-full'>
                 <div className='flex items-center justify-center flex-col'>
                     <h1 className='text-3xl md:text-4xl font-semibold mt-6 sm:mt-7 md:mt-8 lg:mt-12'>
-                        {carData.color} {carData.model}
+                        {data.data.color} {data.data.model}
                     </h1>
                     <div className='border border-[#666] w-full flex mt-8 rounded-xl items-center justify-between gap-3 font-medium text-2xl px-6 py-2 bg-[#242424]'>
-                        {carData.number.slice(0, 6)}
+                        {data.data.number.slice(0, 6)}
                         <div className='h-full w-[1px] bg-[#666]'/>
                         <div className='flex flex-col'>
-                            <p className='text-2xl'>{carData.number.slice(5, 7)}</p>
+                            <p className='text-2xl'>{data.data.number.slice(5, 7)}</p>
                             <div className='flex items-center justify-center gap-2'>
                                 <p className='text-xs'>RUS</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="16" height="16">
