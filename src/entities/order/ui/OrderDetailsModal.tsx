@@ -80,7 +80,7 @@ export const OrderDetailsModal = ({ children, currentOrders }: IProps) => {
                                     />
                                     <h1 className='text-3xl text-center font-semibold'>{orderDetails.cost} руб.</h1>
                                 </div>
-                                <h1 className='text-center text-[#999]'>~{calculateDistance(orderDetails.cost)} км</h1>
+                                <h1 className='text-center text-[#999]'>{orderDetails.distance} км</h1>
                             </div>
                             <div
                                 className='w-full h-full max-h-[calc(100dvh-150px)] sm:max-h-[calc(80dvh-150px)] pb-4 pt-2 overflow-y-auto px-6'>
