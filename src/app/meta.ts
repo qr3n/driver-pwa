@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Test',
-    description: 'Test',
+    title: 'PrimiBOX - Driver',
+    description: 'PrimiBOX - Driver',
     generator: "Next.js",
     manifest: "/manifest.json",
     keywords: ["nextjs", "nextjs14", "next14", "pwa", "next-pwa"],

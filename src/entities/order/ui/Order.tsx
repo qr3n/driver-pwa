@@ -29,8 +29,8 @@ export const Order = (data: IOrder) => {
             <OrderTakeOrDiscount>
                 <OpenOrderDetails {...data}/>
                 <div className='sm:max-w-min z-20'>
-                    {!data.driver_id ? <TakeOrder order_id={data.id}/> : data.status === 'Заказ выполнен' ? <Button>Выполнен</Button> : data.is_in_progress ? <Link href={`/orders/active/${data.id}`}><Button>В работе</Button></Link> : <StartOrderProgress order_id={data.id}/>}
-                    { data.driver_id === session?.id && <CancelOrder id={data.id} email={data.driver_id}/>}
+                    { !data.active ? <Button>Заказ закрыт</Button> : !data.driver_id ? <TakeOrder order_id={data.id}/> : data.status === 'Заказ выполнен' ? <Button>Выполнен</Button> : data.is_in_progress ? <Link href={`/orders/active/${data.id}`}><Button>В работе</Button></Link> : <StartOrderProgress order_id={data.id}/>}
+                    { data.active && data.driver_id === session?.id && <CancelOrder id={data.id} email={data.driver_id}/>}
                 </div>
             </OrderTakeOrDiscount>
 

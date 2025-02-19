@@ -169,7 +169,7 @@ export const getOrders = async () => {
         orders: notSortedOrders,
         todayOrders,
         plannedOrders,
-        completedOrders: notSortedOrders,
+        completedOrders: notSortedOrders.filter(o => (o.status === 'Заказ выполнен' || o.status === 'Отменен' || !o.active) && o.driver_id === session?.id),
         myOrders,
         notSortedOrders
     }

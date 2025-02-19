@@ -9,7 +9,7 @@ import yandexIcon from './yandex.webp'
 import bgDesktop from './bg-desktop.webp'
 import bgMobile from './bg-mobile.webp'
 import dolphin from './dolphin.webp'
-import car from './car.png'
+import carImg from './car.png'
 import dolphinWithGlasses from './dolphin-with-glasses.webp'
 
 
@@ -26,5 +26,5 @@ export {
     bgMobile,
     dolphin,
     dolphinWithGlasses,
-    car
+    carImg
 }

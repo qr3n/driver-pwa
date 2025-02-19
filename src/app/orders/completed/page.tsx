@@ -5,6 +5,7 @@ import { OrderDetailsModal } from '@/entities/order'
 
 export default async function CompletedOrdersPage() {
     const { completedOrders } = await getOrders()
+
     const currentOrders = await getCurrentOrders()
 
     return (
