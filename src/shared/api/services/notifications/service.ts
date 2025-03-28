@@ -1,21 +1,14 @@
-import {
-    IAddNotificationsDeviceRequest,
-    IRemoveNotificationsDeviceRequest
-} from "@/shared/api/services/notifications/types";
+import { DisableNotificationsRequest, EnableNotificationsRequest } from "./types";
 import { baseApi } from "@/shared/api";
 
-class NotificationsService {
-    async getConnection(data: IAddNotificationsDeviceRequest) {
-        return baseApi.get(`/notifications/driver/devices/connection?access_token=${data.access_token}&token=${data.token}`,)
+class NotificationService {
+    async enableNotifications(data: EnableNotificationsRequest) {
+        return await baseApi.post('/notifications/enable', data)
     }
 
-    async addDevice(data: IAddNotificationsDeviceRequest) {
-        return baseApi.post(`/notifications/driver/devices/connect?token=${data.access_token}`, data)
-    }
-
-    async removeDevice(data: IRemoveNotificationsDeviceRequest) {
-        return baseApi.post(`/notifications/driver/devices/disconnect?token=${data.access_token}`, data)
+    async disableNotifications(data: DisableNotificationsRequest) {
+        return await baseApi.post('/notifications/disable', data)
     }
 }
 
-export const notificationsService = new NotificationsService()
+export const notificationsService = new NotificationService()

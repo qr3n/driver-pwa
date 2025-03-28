@@ -1,5 +1,5 @@
-import { SwitchNotificationsStatus } from "@/features/notifications/switch-status/ui/SwitchNotificationsStatus";
 import { Switch } from "@/shared/shadcn/ui/switch";
+import { ToggleNotifications } from "@/features/notifications/toggle/ui/ToggleNotifications";
 
 export default function SettingsPage() {
     return (
@@ -13,7 +13,7 @@ export default function SettingsPage() {
                         <h2 className='font-medium text-md sm:text-lg'>Push-уведомления</h2>
                         <h2 className='text-[#aaa] text-xs sm:text-sm'>Получайте уведомления прямо на ваше устройство</h2>
                     </div>
-                    <SwitchNotificationsStatus/>
+                    <ToggleNotifications/>
                 </div>
                 <div className='flex w-full items-center justify-between border border-[#333] p-4 rounded-2xl gap-3'>
                     <div>

@@ -38,7 +38,7 @@ export const getCurrentOrders = async () => {
     const session = getServerSession()
 
     const data = await fetch(
-        'https://primibox.com/api/driver/orders',
+        'https://primibox.com/api/driver/api/driver/orders',
         { cache: 'no-cache', next: { tags: ['orders'] } }
     )
 
@@ -52,7 +52,7 @@ export const getCurrentOrders = async () => {
 //     const session = useServerSession()
 //
 //     const data = await fetch(
-//         `https://primibox.com/api/order/current?token=${session?.token}`,
+//         `https://primibox.com/api/driver/api/order/current?token=${session?.token}`,
 //         { cache: 'no-cache', next: { tags: ['current_orders'] } }
 //     )
 //
@@ -65,7 +65,7 @@ export const getCurrentOrder = async (id: string) => {
     const session = getServerSession()
 
     const data = await fetch(
-        `https://primibox.com/api/driver/orders/${id}`,
+        `https://primibox.com/api/driver/api/driver/orders/${id}`,
         { cache: 'no-cache', next: { tags: ['current_orders'] }, headers: { 'Authorization': `Bearer ${session?.token}`} }
     )
 
@@ -80,7 +80,7 @@ export const getOrders = async () => {
     const session = getServerSession()
 
     const data = await fetch(
-        'https://primibox.com/api/driver/orders',
+        'https://primibox.com/api/driver/api/driver/orders',
         { cache: 'no-cache', next: { tags: ['orders'] } }
     )
 

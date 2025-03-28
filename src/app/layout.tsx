@@ -9,6 +9,7 @@ import { CookiesProvider } from "next-client-cookies/server";
 import { SliderMenu } from "@/widgets/slider-menu/ui/SliderMenu";
 import { Share } from "@/widgets/share";
 export { metadata }
+import { Toaster as ShadcnToaster } from "@/shared/shadcn/ui/toaster"
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                       fontWeight: 500
                   },
            }}/>
+          <ShadcnToaster/>
           <NextTopLoader color="#4E79FFFF" template='<div class="bar" role="bar"><div class="peg"></div></divz'
                          showSpinner={false}/>
           <CookiesProvider>

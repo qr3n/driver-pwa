@@ -25,7 +25,7 @@ export const Order = (data: IOrder) => {
 
     return (
         <div
-            className='relative cursor-pointer w-full bg-[#151515] flex flex-col-reverse sm:flex-row-reverse sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-3xl'>
+            className='relative shadow-2xl cursor-pointer w-full bg-[#151515] flex flex-col-reverse sm:flex-row-reverse sm:items-center gap-4 justify-between hover:bg-[#222] p-4 rounded-3xl'>
             <OrderTakeOrDiscount>
                 <OpenOrderDetails {...data}/>
                 <div className='sm:max-w-min z-20'>

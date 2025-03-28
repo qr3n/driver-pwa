@@ -9,9 +9,6 @@ export default async function DashboardPage() {
     const { todayOrders, plannedOrders, myOrders } = await getOrders()
     const currentOrders = await getCurrentOrders()
 
-    console.log(todayOrders)
-    console.log(plannedOrders)
-
     return (
         <div className='flex flex-col w-full items-center justify-center pt-20 md:pt-24 px-4'>
             <UpdateOrdersWebsocket/>

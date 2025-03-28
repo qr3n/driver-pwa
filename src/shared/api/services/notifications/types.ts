@@ -1,9 +1,7 @@
-export interface IAddNotificationsDeviceRequest {
+export interface EnableNotificationsRequest {
     access_token: string,
-    token: string,
 }
 
-export interface IRemoveNotificationsDeviceRequest {
+export interface DisableNotificationsRequest {
     access_token: string,
-    id: string,
 }
