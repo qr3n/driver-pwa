@@ -31,7 +31,9 @@ interface INotParsedOrder {
     delivery_time_from: string,
     delivery_time_to: string,
     is_in_progress: boolean,
-    distance: number
+    distance: number,
+    split_group: string,
+    need_split: boolean
 }
 
 export const getCurrentOrders = async () => {
