@@ -2,12 +2,12 @@ import axios from 'axios'
 import { QueryClient } from "@tanstack/react-query";
 
 export const driverApi = axios.create({
-    baseURL: 'https://primibox.com/api/driver/api/driver',
+    baseURL: 'https://primibox.com/api/driver',
     timeout: 10000,
 })
 
 export const baseApi = axios.create({
-    baseURL: 'https://primibox.com/api/driver/api/driver',
+    baseURL: 'https://primibox.com/api/driver',
     timeout: 10000,
 })
 
