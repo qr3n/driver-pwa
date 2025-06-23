@@ -19,7 +19,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
                 <Image src={bgDesktop}
                        className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block'
                        alt='bg'/>
-                <div className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
+                <div className='fixed top-0 left-0 -z-50 w-[100dvw] h-[100dvh] bg-gradient-to-b from-transparent to-black'/>
 
                 {children}
             </div>

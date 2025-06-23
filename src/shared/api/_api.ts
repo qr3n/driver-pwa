@@ -11,6 +11,11 @@ export const baseApi = axios.create({
     timeout: 10000,
 })
 
+export const userApi = axios.create({
+    baseURL: 'https://primibox.com/api',
+    timeout: 10000,
+})
+
 export const queryClient = new QueryClient()
 
 baseApi.interceptors.request.use(

@@ -2,13 +2,24 @@
 
 import { PropsWithChildren, useEffect, useState } from "react";
 import { calculateCost, calculateDistance, IOrder, OrderDetailsContext } from "@/entities/order";
-import { Dialog, DialogClose, DialogContent } from "@/shared/shadcn/ui/dialog";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent, DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/shared/shadcn/ui/dialog";
 import { CreateOrderDiscount } from "@/features/order/discount";
 import { useClientSession } from "@/entities/session/client";
 import { aliIcon, lamodaIcon, ozonIcon, questionIcon, wildberriesIcon, yandexIcon } from "@/shared/assets";
 import Image from "next/image";
 import { useCurrentTime } from "@/shared/hooks/useCurrentTime";
 import { OrderTakeOrDiscount } from "@/entities/order/ui/OrderTakeOrDiscount";
+import { Button } from "@/shared/shadcn/ui/button";
+import { RiLink } from "react-icons/ri";
+import { NewChat } from "@/shared/ui/chat/ui/NewChat";
+import Link from "next/link";
 
 const imagesMap = {
     'Яндекс маркет': yandexIcon,
@@ -52,6 +63,7 @@ export const OrderDetailsModal = ({ children, currentOrders }: IProps) => {
         }
     }, [state]);
 
+    console.log(orderDetails)
 
     return (
         <OrderDetailsContext.Provider value={{
@@ -125,6 +137,15 @@ export const OrderDetailsModal = ({ children, currentOrders }: IProps) => {
                                 <h1 className='text-2xl text-white font-semibold mt-6'>Дополнительно</h1>
                                 <h1 className='text-xl text-[#999] mt-4'>Комментарий</h1>
                                 <p className='mt-1 font-medium'>{orderDetails.comment || 'Отсутствует'}</p>
+                                <h1 className='text-xl text-[#999] mt-4'>Кто сделал заказ?</h1>
+                                <Link href={`/customers/${orderDetails.user_id}`}>
+                                    <button   className='flex gap-3 mt-2 bg-blue-500/50  hover:bg-blue-500/40 px-2 py-1 rounded-full text-xs font-medium'>
+                                    <span className='bg-blue-500 rounded-full p-1'>
+                                        <RiLink />
+                                    </span>
+                                        Профиль клиента
+                                    </button>
+                                </Link>
                             </div>
 
                             {/*{orderDetails.driver_email === session?.email ? <></> : (takeOrDiscount === 'discount' ? <>*/}

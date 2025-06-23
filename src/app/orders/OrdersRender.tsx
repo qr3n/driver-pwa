@@ -44,7 +44,7 @@ export const OrdersRender = async (props: IProps) => {
                             <Image placeholder="blur" src={bgMobile} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
                             <Image placeholder="blur" src={bgDesktop} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
                             <div
-                                className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
+                                className='fixed top-0 left-0 -z-50 w-[100dvw] h-[100dvh] bg-gradient-to-b from-transparent to-black'/>
                             <div className='absolute top-8 flex items-center justify-center flex-col'>
                                 <Image priority src={dolphin} width={350} height={350} alt='test' className='w-40 sm:w-44 md:w-44 lg:w-48 xl:w-56'/>
                                 <h1 className='text-2xl md:text-3xl font-semibold mt-8'>
@@ -84,7 +84,7 @@ export const OrdersRender = async (props: IProps) => {
                             <Image placeholder="blur" src={bgMobile} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 md:hidden' alt='bg'/>
                             <Image placeholder="blur" src={bgDesktop} className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
                             <div
-                                className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
+                                className='fixed top-0 left-0 -z-50 w-[100dvw] h-[100dvh] bg-gradient-to-b from-transparent to-black'/>
                             <div className='absolute top-8 flex items-center justify-center flex-col'>
                                 <Image priority src={dolphin} width={350} height={350} alt='test' className='w-40 sm:w-44 md:w-44 lg:w-48 xl:w-56'/>
                                 <h1 className='text-2xl md:text-3xl font-semibold mt-8'>

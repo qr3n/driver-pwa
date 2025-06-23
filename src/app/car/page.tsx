@@ -36,7 +36,7 @@ export default function CarPage() {
             <Image placeholder="blur" src={bgDesktop}
                    className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
             <div
-                className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
+                className='fixed top-0 left-0 -z-50 w-[100dvw] h-[100dvh] bg-gradient-to-b from-transparent to-black'/>
 
             <div className='flex items-center justify-center flex-col w-full'>
                 <div className='flex items-center justify-center flex-col'>
@@ -68,7 +68,7 @@ export default function CarPage() {
             <Image placeholder="blur" src={bgDesktop}
                    className='fixed w-[100dvw] h-[100dvh] object-cover top-0 left-0 -z-50 hidden md:block' alt='bg'/>
             <div
-                className='fixed top-0 left-0 -z-50 w-screen h-screen bg-gradient-to-b from-transparent to-black'/>
+                className='fixed top-0 left-0 -z-50 w-[100dvw] h-[100dvh] bg-gradient-to-b from-transparent to-black'/>
 
             <div className='flex items-center justify-center flex-col'>
                 <Image priority src={carImg} width={450} height={450} alt='test'
