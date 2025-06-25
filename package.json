@@ -11,7 +11,7 @@
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.8",
     "@hookform/resolvers": "^3.9.0",
-    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-progress": "^1.1.0",
     "@radix-ui/react-select": "^2.1.2",
@@ -26,6 +26,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^11.0.2",
+    "framer-motion": "^12.19.1",
+    "input-otp": "^1.4.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.427.0",
     "next": "14.2.5",
@@ -45,6 +47,7 @@
     "tailwind-merge": "^2.5.0",
     "tailwindcss-animate": "^1.0.7",
     "use-ripple-hook": "^1.0.24",
+    "vaul": "^1.1.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

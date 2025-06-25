@@ -15,3 +15,19 @@ export interface LogInResponse {
 export interface SignUpResponse {
     access_token: string
 }
+
+export interface SendResetPasswordCodeRequest {
+    email: string
+}
+
+
+export interface ResetPasswordParams {
+    email: string
+    code: string
+    new_password: string
+}
+
+export interface ResetPasswordResponse {
+    access_token: string
+
+}
